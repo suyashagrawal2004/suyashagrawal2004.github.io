@@ -551,7 +551,7 @@ export default function Page() {
               
               <Reveal className="mb-8 h-[24px]">
                 <span className="text-sm md:text-base font-bold tracking-[0.5em] text-[var(--text-muted)] uppercase flex items-center">
-                  <MultiTypingText texts={["AI Engineer", "Generative AI Specialist", "Workflow Automation"] as const} />
+                  <MultiTypingText texts={["AI Engineer","AI Product Manager", "Generative AI Specialist", "Workflow Automation"] as const} />
                   <span className="typing-cursor h-4 ml-1" />
                 </span>
               </Reveal>

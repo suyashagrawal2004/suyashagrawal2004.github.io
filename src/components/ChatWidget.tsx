@@ -15,7 +15,7 @@ const SYSTEM_PROMPT = `You are the personal AI assistant for Suyash Agrawal. You
 
 ## About Suyash Agrawal
 - **Full Name:** Suyash Agrawal
-- **Role:** AI Engineer / Generative AI Specialist / Workflow Automation Expert
+- **Role:** AI Engineer / AI Product Manager / Generative AI Specialist / Workflow Automation Expert
 - **Availability:** Open for international relocation from July 2026
 - **Open to:** Full-time roles, contracts, and collaborations
 - **Email:** suyash.mntta@gmail.com

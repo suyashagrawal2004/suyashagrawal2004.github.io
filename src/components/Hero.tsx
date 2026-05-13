@@ -16,7 +16,7 @@ export default function Hero() {
           className="order-2 lg:order-1"
         >
           <div className="mb-6 inline-block px-3 py-1 bg-accent-primary/10 border border-[var(--accent-primary)]/20 rounded text-[10px] font-bold tracking-[0.3em] text-[var(--accent-primary)] uppercase">
-            AI Engineer & Researcher
+            AI Engineer & Product Manager
           </div>
           <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-[var(--accent-primary)] leading-none mb-8">
             SUYASH AGRAWAL
