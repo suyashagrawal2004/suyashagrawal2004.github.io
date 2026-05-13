@@ -186,7 +186,7 @@ export default function ChatWidget() {
               ],
               generationConfig: {
                 temperature: 0.7,
-                maxOutputTokens: 400,
+                maxOutputTokens: 1000,
               },
             }),
           }
