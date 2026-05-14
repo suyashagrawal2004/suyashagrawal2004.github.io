@@ -28,7 +28,7 @@ const CURSOR_IMG = "/assets/cursor.png";
 const HERO_IMG = "/assets/suyash_photo.jpg";
 const PROJECT_IMGS = [
   "/assets/project-music-maestro.png",
-  "/assets/coming_soon.png",
+  "/assets/project-mix-n-match.jpg",
   "/assets/coming_soon.png",
 ];
 
@@ -932,21 +932,36 @@ export default function Page() {
                 </div>
               </div>
 
-              {/* Card 2: Coming Soon */}
-              <div className="project-card focus-opacity opacity-70 cursor-default group">
+              {/* Card 2: MixNMatch */}
+              <div
+                className="project-card nav-link group"
+                onClick={() =>
+                  setModal({
+                    title: "MixNMatch",
+                    desc: "A creative project exploring unique combinations and interactive matching experiences.",
+                    url: "https://mix-n-match-ten.vercel.app/",
+                  })
+                }
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  className="w-full h-full object-cover transition-all duration-700"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   src={PROJECT_IMGS[1]}
-                  alt="Coming Soon"
+                  alt="MixNMatch"
                 />
                 <div className="project-overlay">
-                  <h4 className="text-4xl font-headline font-bold text-[var(--text-muted)] mb-2 uppercase tracking-tighter">
-                    COMING SOON...
+                  <h4 className="text-4xl font-headline font-bold text-[var(--text)] mb-2 group-hover:text-accent transition-colors">
+                    MixNMatch
                   </h4>
-                  <p className="text-[var(--text-muted)] mb-8 text-sm italic">
-                    Additional AI-driven experiences are currently being refined.
+                  <p className="text-[var(--text-muted)] mb-8 text-sm">
+                    A creative project exploring unique combinations and interactive matching experiences.
                   </p>
+                  <div className="flex items-center gap-2 text-accent text-[10px] font-bold uppercase tracking-[0.3em]">
+                    Click to Interact{" "}
+                    <span className="material-symbols-outlined text-sm">
+                      north_east
+                    </span>
+                  </div>
                 </div>
               </div>
 
