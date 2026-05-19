@@ -28,8 +28,8 @@ const CURSOR_IMG = "/assets/cursor.png";
 const HERO_IMG = "/assets/suyash_photo.jpg";
 const PROJECT_IMGS = [
   "/assets/project-music-maestro.png",
-  "/assets/project-mix-n-match.jpg",
-  "/assets/coming_soon.png",
+  "/assets/project-mix-n-match.png",
+  "/assets/project-stonks.png",
 ];
 
 /* ═══════════════════════════════════════════════════
@@ -938,7 +938,7 @@ export default function Page() {
                 onClick={() =>
                   setModal({
                     title: "MixNMatch",
-                    desc: "A creative project exploring unique combinations and interactive matching experiences.",
+                    desc: "An interactive, keyboard-controlled web drum machine and loop station powered by the Web Audio API.",
                     url: "https://mix-n-match-ten.vercel.app/",
                   })
                 }
@@ -954,7 +954,7 @@ export default function Page() {
                     MixNMatch
                   </h4>
                   <p className="text-[var(--text-muted)] mb-8 text-sm">
-                    A creative project exploring unique combinations and interactive matching experiences.
+                    An interactive, keyboard-controlled web drum machine and loop station powered by the Web Audio API.
                   </p>
                   <div className="flex items-center gap-2 text-accent text-[10px] font-bold uppercase tracking-[0.3em]">
                     Click to Interact{" "}
@@ -965,21 +965,36 @@ export default function Page() {
                 </div>
               </div>
 
-              {/* Card 3: Coming Soon */}
-              <div className="project-card focus-opacity opacity-70 cursor-default group">
+              {/* Card 3: Stonks */}
+              <div
+                className="project-card nav-link group"
+                onClick={() =>
+                  setModal({
+                    title: "Stonks",
+                    desc: "A real-time fintech dashboard featuring a RAG-powered AI assistant for smart mutual fund insights.",
+                    url: "https://stonks-omega-red.vercel.app/",
+                  })
+                }
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  className="w-full h-full object-cover transition-all duration-700"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   src={PROJECT_IMGS[2]}
-                  alt="Coming Soon"
+                  alt="Stonks"
                 />
                 <div className="project-overlay">
-                  <h4 className="text-4xl font-headline font-bold text-[var(--text-muted)] mb-2 uppercase tracking-tighter">
-                    COMING SOON...
+                  <h4 className="text-4xl font-headline font-bold text-[var(--text)] mb-2 group-hover:text-accent transition-colors">
+                    Stonks
                   </h4>
-                  <p className="text-[var(--text-muted)] mb-8 text-sm italic">
-                    Stay tuned for more generative AI experiments.
+                  <p className="text-[var(--text-muted)] mb-8 text-sm">
+                    A real-time fintech dashboard featuring a RAG-powered AI assistant for smart mutual fund insights.
                   </p>
+                  <div className="flex items-center gap-2 text-accent text-[10px] font-bold uppercase tracking-[0.3em]">
+                    Click to Interact{" "}
+                    <span className="material-symbols-outlined text-sm">
+                      north_east
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1179,7 +1194,7 @@ export default function Page() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:max-w-xl">
               <a
                 className="nav-link p-6 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl hover:border-[var(--primary)] transition-all flex flex-col gap-4 group"
-                href="https://www.linkedin.com/in/suyash-agrawal-mntta/"
+                href="https://www.linkedin.com/in/suyashagrawal2004/"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -1194,13 +1209,13 @@ export default function Page() {
                     LinkedIn
                   </span>
                   <span className="text-[10px] text-[var(--text-muted)] font-mono mt-1 group-hover:text-[var(--text-muted)] transition-colors tracking-normal">
-                    suyash-agrawal-mntta
+                    suyashagrawal2004
                   </span>
                 </div>
               </a>
               <a
                 className="nav-link p-6 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl hover:border-[var(--primary)] transition-all flex flex-col gap-4 group"
-                href="https://github.com/suyash-agrawal-mntta"
+                href="https://github.com/suyashagrawal2004"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -1215,13 +1230,13 @@ export default function Page() {
                     GitHub
                   </span>
                   <span className="text-[10px] text-[var(--text-muted)] font-mono mt-1 group-hover:text-[var(--text-muted)] transition-colors tracking-normal">
-                    suyash-agrawal-mntta
+                    suyashagrawal2004
                   </span>
                 </div>
               </a>
               <a
                 className="nav-link p-6 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl hover:border-[var(--primary)] transition-all flex flex-col gap-4 group"
-                href="mailto:suyash.mntta@gmail.com"
+                href="mailto:dm.suyash.a@gmail.com"
               >
                 <span className="material-symbols-outlined text-accent text-3xl">
                   mail
@@ -1231,7 +1246,7 @@ export default function Page() {
                     Email
                   </span>
                   <span className="text-[10px] text-[var(--text-muted)] font-mono mt-1 group-hover:text-[var(--text-muted)] transition-colors tracking-normal">
-                    suyash.mntta@gmail.com
+                    dm.suyash.a@gmail.com
                   </span>
                 </div>
               </a>
@@ -1291,15 +1306,15 @@ export default function Page() {
         <a href="tel:+919981046888" className="nav-link text-[var(--text-muted)] hover:text-accent transition-colors" title="(+91) 99810 46888">
           <span className="material-symbols-outlined text-lg">call</span>
         </a>
-        <a href="mailto:suyash.mntta@gmail.com" className="nav-link text-[var(--text-muted)] hover:text-accent transition-colors" title="suyash.mntta@gmail.com">
+        <a href="mailto:dm.suyash.a@gmail.com" className="nav-link text-[var(--text-muted)] hover:text-accent transition-colors" title="dm.suyash.a@gmail.com">
           <span className="material-symbols-outlined text-lg">mail</span>
         </a>
-        <a href="https://github.com/suyash-agrawal-mntta" className="nav-link text-[var(--text-muted)] hover:text-accent transition-colors" title="suyash-agrawal-mntta" target="_blank" rel="noreferrer">
+        <a href="https://github.com/suyashagrawal2004" className="nav-link text-[var(--text-muted)] hover:text-accent transition-colors" title="suyashagrawal2004" target="_blank" rel="noreferrer">
           <svg className="w-[22px] h-[22px] fill-current" viewBox="0 0 24 24">
             <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.098-2.646 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.376.202 2.394.1 2.646.64.699 1.028 1.591 1.028 2.682 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
           </svg>
         </a>
-        <a href="https://www.linkedin.com/in/suyash-agrawal-mntta/" className="nav-link text-[var(--text-muted)] hover:text-accent transition-colors mt-2" title="suyash-agrawal-mntta" target="_blank" rel="noreferrer">
+        <a href="https://www.linkedin.com/in/suyashagrawal2004/" className="nav-link text-[var(--text-muted)] hover:text-accent transition-colors mt-2" title="suyashagrawal2004" target="_blank" rel="noreferrer">
           <svg className="w-[17px] h-[17px] fill-current" viewBox="0 0 24 24">
             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
           </svg>

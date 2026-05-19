@@ -11,17 +11,17 @@ const SYSTEM_PROMPT = `You are the personal AI assistant for Suyash Agrawal. You
 ## Key Instructions:
 1. **Perspective:** Always speak in the **THIRD PERSON** (e.g., "Suyash is...", "He has...", "Suyash worked at..."). Never use "I" or "my" to refer to Suyash.
 2. **Accuracy:** Never make up information. If you don't know something, suggest the visitor reach out to him directly.
-3. **Contact Info:** If someone asks how to contact Suyash, provide his email (suyash.mntta@gmail.com) and mention his LinkedIn. 
+3. **Contact Info:** If someone asks how to contact Suyash, provide his email (dm.suyash.a@gmail.com) and mention his LinkedIn. 
 
 ## About Suyash Agrawal
 - **Full Name:** Suyash Agrawal
 - **Role:** AI Engineer / AI Product Manager / Generative AI Specialist / Workflow Automation Expert
 - **Availability:** Open for international relocation from July 2026
 - **Open to:** Full-time roles, contracts, and collaborations
-- **Email:** suyash.mntta@gmail.com
+- **Email:** dm.suyash.a@gmail.com
 - **Phone:** (+91) 99810 46888
-- **LinkedIn:** linkedin.com/in/suyash-agrawal-mntta
-- **GitHub:** github.com/suyash-agrawal-mntta
+- **LinkedIn:** linkedin.com/in/suyashagrawal2004
+- **GitHub:** github.com/suyashagrawal2004
 
 ## Current Experience
 - **AI Developer Intern** at Appiness Interactive Private Limited (Jan 2026 – Present)
@@ -46,7 +46,8 @@ const SYSTEM_PROMPT = `You are the personal AI assistant for Suyash Agrawal. You
 
 ## Projects
 - **Music Maestro** (Live): An AI-powered app that turns your mood or prompt into a Spotify playlist automatically. Live at: https://music-maestro-lyart.vercel.app/
-
+- **MixNMatch** (Live): An interactive, keyboard-controlled web drum machine and loop station powered by the Web Audio API. Live at: https://mix-n-match-ten.vercel.app/
+- **Stonks** (Live): A real-time fintech dashboard featuring a RAG-powered AI assistant for smart mutual fund insights. Live at: https://stonks-omega-red.vercel.app/
 ## Certifications
 - Microsoft Azure AI Fundamentals (AI-900)
 - AWS Academy Cloud Architecting
@@ -89,7 +90,7 @@ const CONTACT_LINKS = [
         <polyline points="22,6 12,13 2,6" />
       </svg>
     ),
-    href: "mailto:suyash.mntta@gmail.com",
+    href: "mailto:dm.suyash.a@gmail.com",
     color: "#EA4335",
   },
   {
@@ -99,7 +100,7 @@ const CONTACT_LINKS = [
         <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
       </svg>
     ),
-    href: "https://linkedin.com/in/suyash-agrawal-mntta",
+    href: "https://www.linkedin.com/in/suyashagrawal2004/",
     color: "#0077B5",
   },
   {
@@ -217,7 +218,7 @@ export default function ChatWidget() {
           {
             role: "assistant",
             content:
-              "I apologize, but I'm having trouble connecting right now. You can reach Suyash directly at suyash.mntta@gmail.com",
+              "I apologize, but I'm having trouble connecting right now. You can reach Suyash directly at dm.suyash.a@gmail.com",
             isContactCard: true
           },
         ]);

@@ -26,24 +26,24 @@ I specialize in bridging the gap between cutting-edge artificial intelligence an
 Feel free to reach out to collaborate on projects, discuss AI developments, or explore career opportunities:
 
 <p align="left">
-  <a href="https://www.linkedin.com/in/suyash-agrawal-mntta/" target="_blank">
+  <a href="https://www.linkedin.com/in/suyashagrawal2004/" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"/>
   </a>
-  <a href="mailto:suyash.mntta@gmail.com">
+  <a href="mailto:dm.suyash.a@gmail.com">
     <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email Badge"/>
   </a>
   <a href="tel:+919981046888">
     <img src="https://img.shields.io/badge/Phone-34A853?style=for-the-badge&logo=whatsapp&logoColor=white" alt="Phone Badge"/>
   </a>
-  <a href="https://github.com/suyash-agrawal-mntta" target="_blank">
+  <a href="https://github.com/suyashagrawal2004" target="_blank">
     <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Badge"/>
   </a>
 </p>
 
-- 📧 **Primary Email:** [suyash.mntta@gmail.com](mailto:suyash.mntta@gmail.com)
-- 💼 **LinkedIn Profile:** [linkedin.com/in/suyash-agrawal-mntta](https://www.linkedin.com/in/suyash-agrawal-mntta/)
+- 📧 **Primary Email:** [dm.suyash.a@gmail.com](mailto:dm.suyash.a@gmail.com)
+- 💼 **LinkedIn Profile:** [linkedin.com/in/suyashagrawal2004](https://www.linkedin.com/in/suyashagrawal2004/)
 - 📱 **Contact Number:** `(+91) 99810 46888`
-- 🖥️ **GitHub Hub:** [github.com/suyash-agrawal-mntta](https://github.com/suyash-agrawal-mntta)
+- 🖥️ **GitHub Hub:** [github.com/suyashagrawal2004](https://github.com/suyashagrawal2004)
 
 ---
 
@@ -96,11 +96,17 @@ I build full-stack intelligent applications using a modern, reactive stack:
 - **Tech Stack:** Generative AI APIs, Spotify Web API, Next.js, TypeScript, Tailored Neon CSS.
 - **Live Site:** [music-maestro-lyart.vercel.app](https://music-maestro-lyart.vercel.app/)
 
-### 🎨 [MixNMatch](https://mix-n-match-ten.vercel.app/)
-*Dynamic Concept Matching & Visualizer App*
-- **The Concept:** A highly responsive creative visualizer showcasing unique interactive combinations and responsive layout matchings. Fully optimized to ensure readability, minimal layout shift, and smooth UI transitions.
-- **Tech Stack:** React, Framer Motion, Tailored HSL Colors, Sleek Dark Aesthetic.
+### 🎹 [MixNMatch](https://mix-n-match-ten.vercel.app/)
+*Interactive Beat Maker & Visualizer App*
+- **The Concept:** An interactive, keyboard-controlled web drum machine and loop station powered by the Web Audio API.
+- **Tech Stack:** React, Framer Motion, Web Audio API, Sleek Dark Aesthetic.
 - **Live Site:** [mix-n-match-ten.vercel.app](https://mix-n-match-ten.vercel.app/)
+
+### 📈 [Stonks](https://stonks-omega-red.vercel.app/)
+*Real-time Fintech Dashboard & Investment Assistant*
+- **The Concept:** A real-time fintech dashboard featuring a RAG-powered AI assistant for smart mutual fund insights.
+- **Tech Stack:** React, Python, RAG, AI Chatbot.
+- **Live Site:** [stonks-omega-red.vercel.app](https://stonks-omega-red.vercel.app/)
 
 ### 🌌 3D Interactive Portfolio (This Repository)
 - **The Concept:** A top-tier, performance-driven web portfolio built to demonstrate spatial 3D elements in a web browser. Includes a dynamic theme-switching layer (Deep Space, Digital Lavender, Catppuccin) and a conversational AI Chat Widget.
@@ -140,8 +146,8 @@ If you'd like to run this 3D interactive portfolio locally, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/suyash-agrawal-mntta/suyash-agrawal-mntta.github.io.git
-   cd suyash-agrawal-mntta.github.io
+   git clone https://github.com/suyashagrawal2004/suyashagrawal2004.github.io.git
+   cd suyashagrawal2004.github.io
    ```
 
 2. **Install the dependencies:**
