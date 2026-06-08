@@ -540,7 +540,7 @@ export default function Page() {
               <Reveal className="mb-8 inline-flex items-center gap-3 px-4 py-1.5 bg-[var(--surface-variant)] border border-accent-20 rounded-full shadow-[0_0_15px_rgba(0,0,0,0.5)]">
                 <span className="w-2 h-2 rounded-full bg-[var(--primary)] animate-[pulse_1s_infinite] shadow-[0_0_10px_var(--primary)]" />
                 <span className="text-[10px] font-bold tracking-[0.1em] text-[var(--text-muted)]">
-                  Open for international relocation from July 2026
+                  Open to Immediate Relocation | India & Worldwide
                 </span>
               </Reveal>
 

@@ -16,7 +16,7 @@ const SYSTEM_PROMPT = `You are the personal AI assistant for Suyash Agrawal. You
 ## About Suyash Agrawal
 - **Full Name:** Suyash Agrawal
 - **Role:** AI Engineer / AI Product Manager / Generative AI Specialist / Workflow Automation Expert
-- **Availability:** Open for international relocation from July 2026
+- **Availability:** Open to Immediate Relocation | India & Worldwide
 - **Open to:** Full-time roles, contracts, and collaborations
 - **Email:** dm.suyash.a@gmail.com
 - **Phone:** (+91) 99810 46888
@@ -206,10 +206,10 @@ export default function ChatWidget() {
 
         setMessages((prev) => [
           ...prev,
-          { 
-            role: "assistant", 
+          {
+            role: "assistant",
             content: reply,
-            isContactCard: isContactRequest 
+            isContactCard: isContactRequest
           },
         ]);
       } catch {
@@ -335,17 +335,17 @@ export default function ChatWidget() {
                       style={
                         msg.role === "user"
                           ? {
-                              background: "var(--primary)",
-                              color: "#0d1117",
-                              fontWeight: 500,
-                              borderBottomRightRadius: "6px",
-                            }
+                            background: "var(--primary)",
+                            color: "#0d1117",
+                            fontWeight: 500,
+                            borderBottomRightRadius: "6px",
+                          }
                           : {
-                              background: "rgba(255,255,255,0.05)",
-                              color: "var(--text)",
-                              border: "1px solid var(--border-color)",
-                              borderBottomLeftRadius: "6px",
-                            }
+                            background: "rgba(255,255,255,0.05)",
+                            color: "var(--text)",
+                            border: "1px solid var(--border-color)",
+                            borderBottomLeftRadius: "6px",
+                          }
                       }
                     >
                       {msg.content}

@@ -17,7 +17,7 @@ I am an **AI Engineer**, **AI Product Manager**, and **Generative AI Specialist*
 I specialize in bridging the gap between cutting-edge artificial intelligence and high-performance, interactive user experiences. Currently architecting enterprise-scale workflow automations, I am driven by the goal of making intelligent software seamless, intuitive, and highly scalable.
 
 > [!IMPORTANT]
-> 🌍 **Availability:** Open for international relocation and full-time global opportunities starting **July 2026**.
+> 🌍 **Availability:** Open to Immediate Relocation | India & Worldwide.
 
 ---
 
