@@ -43,10 +43,9 @@
 /* ═══════════════════════════════════════════════════
    2. GLOBAL RESETS & BODY
    ═══════════════════════════════════════════════════ */
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   * { cursor: none !important; }
 }
-* { cursor: none !important; }
 
 body {
   background-color: var(--bg);
@@ -80,11 +79,19 @@ body {
   align-items: center;
   justify-content: center;
 }
+@media (hover: none) and (pointer: coarse) {
+  #custom-cursor { display: none !important; }
+}
 #cursor-img {
   width: 100%;
   height: 100%;
   transition: transform 0.3s ease;
   transform: rotate(45deg);
+  background-color: var(--primary);
+  -webkit-mask: url(/assets/cursor.png) no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url(/assets/cursor.png) no-repeat center;
+  mask-size: contain;
 }
 #cursor-dot-inner {
   position: absolute;
@@ -195,11 +202,16 @@ body {
    8. HERO IMAGE FLOAT — Exact Stitch
    ═══════════════════════════════════════════════════ */
 .hero-img-container img {
-  filter: grayscale(100%);
+  filter: none;
   transition: all 0.8s ease;
 }
-.hero-img-container:hover img {
-  filter: grayscale(0%);
+@media (min-width: 1024px) {
+  .hero-img-container img {
+    filter: grayscale(100%);
+  }
+  .hero-img-container:hover img {
+    filter: grayscale(0%);
+  }
 }
 .hero-img-float {
   animation: float 6s ease-in-out infinite;
@@ -214,12 +226,17 @@ body {
    ═══════════════════════════════════════════════════ */
 .timeline-line {
   position: absolute;
-  left: 50%;
+  left: 24px;
   top: 0;
   bottom: 0;
   width: 2px;
   background: rgba(255,255,255,0.05);
   transform: translateX(-50%);
+}
+@media (min-width: 768px) {
+  .timeline-line {
+    left: 50%;
+  }
 }
 #timeline-progress {
   position: absolute;
@@ -233,7 +250,7 @@ body {
 }
 .milestone-node {
   position: absolute !important;
-  left: 50% !important;
+  left: 24px !important;
   top: 50% !important;
   translate: -50% -50% !important;
   width: 16px;
@@ -247,8 +264,19 @@ body {
   z-index: 10;
   pointer-events: none;
 }
+@media (min-width: 768px) {
+  .milestone-node {
+    left: 50% !important;
+  }
+}
 .timeline-row {
   transition: transform 0.4s ease, filter 0.4s ease;
+  transform-origin: 24px 50%;
+}
+@media (min-width: 768px) {
+  .timeline-row {
+    transform-origin: center;
+  }
 }
 .timeline-row.active {
   transform: scale(1.05);
@@ -258,6 +286,9 @@ body {
   scale: 1.8;
   background: var(--primary);
   box-shadow: 0 0 20px var(--primary);
+}
+.milestone-node.passed {
+  background: var(--primary);
 }
 
 /* ═══════════════════════════════════════════════════

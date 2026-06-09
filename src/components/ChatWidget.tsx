@@ -24,7 +24,7 @@ const SYSTEM_PROMPT = `You are the personal AI assistant for Suyash Agrawal. You
 - **GitHub:** github.com/suyashagrawal2004
 
 ## Current Experience
-- **AI Developer Intern** at Appiness Interactive Private Limited (Jan 2026 – Present)
+- **AI Engineer Intern** at Appiness Interactive Private Limited (Jan 2026 – Present)
   - Location: Bengaluru, KA, India
   - Developing enterprise-grade agentic workflows and LLM orchestration layers
   - Focused on improving retrieval accuracy and multi-step reasoning capabilities
@@ -173,7 +173,7 @@ export default function ChatWidget() {
           }));
 
         const response = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

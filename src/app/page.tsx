@@ -349,9 +349,15 @@ export default function Page() {
             const rc = rr.top + rr.height / 2;
             if (rc < vc + 50 && rc > vc - 250) {
               nodes[idx]?.classList.add("active");
+              nodes[idx]?.classList.remove("passed");
               row.classList.add("active");
+            } else if (rc <= vc - 250) {
+              nodes[idx]?.classList.remove("active");
+              nodes[idx]?.classList.add("passed");
+              row.classList.remove("active");
             } else {
               nodes[idx]?.classList.remove("active");
+              nodes[idx]?.classList.remove("passed");
               row.classList.remove("active");
             }
           });
@@ -448,8 +454,7 @@ export default function Page() {
     <>
       {/* ── Custom Cursor ── */}
       <div id="custom-cursor" ref={cursorRef}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt="Crosshair" id="cursor-img" src={CURSOR_IMG} />
+        <div id="cursor-img" />
         <div id="cursor-dot-inner" />
       </div>
 
@@ -532,7 +537,7 @@ export default function Page() {
       <main>
         {/* ── HERO ── min-h-screen, pt-20=80px, px-8=32px */}
         <section
-          className="min-h-screen flex items-center justify-center pt-20 px-8"
+          className="min-h-screen flex items-center justify-center pt-28 pb-20 lg:pt-20 lg:pb-0 px-8"
           id="about"
         >
           <div className="max-w-7xl w-full grid lg:grid-cols-2 gap-16 items-center">
@@ -604,7 +609,7 @@ export default function Page() {
           id="skills"
         >
           <div className="max-w-7xl mx-auto">
-            <h2 className="font-headline text-4xl md:text-6xl font-bold text-primary-neon mb-20 hover-green transition-colors">
+            <h2 className="font-headline text-3xl md:text-6xl font-bold text-primary-neon mb-20 hover-green transition-colors">
               <TypingText text="TECHNICAL SKILLS" />
               <span className="typing-cursor" />
             </h2>
@@ -732,7 +737,7 @@ export default function Page() {
           <div className="max-w-7xl mx-auto relative">
             <div className="flex items-center justify-center mb-32">
               <Reveal className="w-full text-center">
-                <h2 className="font-headline text-4xl md:text-6xl font-bold text-primary-neon uppercase">
+                <h2 className="font-headline text-3xl md:text-6xl font-bold text-primary-neon uppercase">
                   <TypingText text="EXPERIENCE & EDUCATION" />
                   <span className="typing-cursor" />
                 </h2>
@@ -751,12 +756,12 @@ export default function Page() {
 
               {/* Item 1: Experience — gap-24=96px mb-48=192px pr-16=64px */}
               <div className="relative grid md:grid-cols-2 gap-24 items-center mb-48 timeline-row group w-full">
-                <Reveal className="md:text-right md:pr-16">
+                <Reveal className="pl-[60px] md:pl-0 md:pr-16 md:text-right">
                   <div className="text-xs font-bold text-accent tracking-[0.3em] mb-4">
                     JAN 2026 - PRESENT
                   </div>
                   <h4 className="text-2xl font-bold text-[var(--text)] mb-2 hover-green transition-colors">
-                    AI Developer Intern
+                    AI Engineer Intern
                   </h4>
                   <div className="mb-4">
                     <p className="text-[var(--text-muted)] font-medium">
@@ -768,7 +773,8 @@ export default function Page() {
                   </div>
                   <p className="text-sm text-[var(--text-muted)] leading-relaxed max-w-md md:ml-auto">
                     Developing enterprise-grade agentic workflows and LLM
-                    orchestration layers. Focused on improving retrieval accuracy
+                    orchestration layers. Focused on improving retrieval accuracy{" "}
+                    <br className="hidden md:block" />
                     and multi-step reasoning capabilities.
                   </p>
                 </Reveal>
@@ -781,7 +787,7 @@ export default function Page() {
               <div className="relative grid md:grid-cols-2 gap-24 items-center mb-48 timeline-row group w-full">
                 <div className="hidden md:block" />
                 <div className="milestone-node" />
-                <Reveal className="md:pl-16">
+                <Reveal className="pl-[60px] md:pl-16">
                   <div className="text-xs font-bold text-accent tracking-[0.3em] mb-4">
                     2022 - 2026
                   </div>
@@ -809,7 +815,7 @@ export default function Page() {
               <div className="relative grid md:grid-cols-2 gap-24 items-center mb-48 timeline-row group w-full">
                 <div className="hidden md:block" />
                 <div className="milestone-node" />
-                <Reveal className="md:pl-16">
+                <Reveal className="pl-[60px] md:pl-16">
                   <div className="text-xs font-bold text-accent tracking-[0.3em] mb-4">
                     2020 - 2022
                   </div>
@@ -841,7 +847,7 @@ export default function Page() {
               <div className="relative grid md:grid-cols-2 gap-24 items-center timeline-row group w-full">
                 <div className="hidden md:block" />
                 <div className="milestone-node" />
-                <Reveal className="md:pl-16">
+                <Reveal className="pl-[60px] md:pl-16">
                   <div className="text-xs font-bold text-accent tracking-[0.3em] mb-4">
                     2008 - 2020
                   </div>
@@ -888,8 +894,8 @@ export default function Page() {
         >
           <div className="sticky-wrapper">
             {/* Title overlay */}
-            <div className="absolute top-0 md:top-20 left-0 w-full px-8 md:px-16 z-20">
-              <h2 className="font-headline text-5xl md:text-7xl font-bold text-primary-neon uppercase hover-green transition-colors text-left pt-12 md:pt-0">
+            <div className="absolute top-20 left-0 w-full px-8 md:px-16 z-20">
+              <h2 className="font-headline text-3xl md:text-7xl font-bold text-primary-neon uppercase hover-green transition-colors text-left md:pt-0">
                 <TypingText text="PROJECTS" />
                 <span className="typing-cursor" />
               </h2>
@@ -930,6 +936,11 @@ export default function Page() {
                     </span>
                   </div>
                 </div>
+                {/* Mobile-only always-on interact badge */}
+                <div className="absolute bottom-4 right-4 md:hidden flex items-center gap-1.5 px-3 py-1.5 bg-[var(--surface-darker)] border border-accent-40 rounded-full text-accent text-[9px] font-bold uppercase tracking-widest z-10 shadow-lg pointer-events-none">
+                  <span>Interact</span>
+                  <span className="material-symbols-outlined text-[10px]">north_east</span>
+                </div>
               </div>
 
               {/* Card 2: MixNMatch */}
@@ -962,6 +973,11 @@ export default function Page() {
                       north_east
                     </span>
                   </div>
+                </div>
+                {/* Mobile-only always-on interact badge */}
+                <div className="absolute bottom-4 right-4 md:hidden flex items-center gap-1.5 px-3 py-1.5 bg-[var(--surface-darker)] border border-accent-40 rounded-full text-accent text-[9px] font-bold uppercase tracking-widest z-10 shadow-lg pointer-events-none">
+                  <span>Interact</span>
+                  <span className="material-symbols-outlined text-[10px]">north_east</span>
                 </div>
               </div>
 
@@ -996,6 +1012,11 @@ export default function Page() {
                     </span>
                   </div>
                 </div>
+                {/* Mobile-only always-on interact badge */}
+                <div className="absolute bottom-4 right-4 md:hidden flex items-center gap-1.5 px-3 py-1.5 bg-[var(--surface-darker)] border border-accent-40 rounded-full text-accent text-[9px] font-bold uppercase tracking-widest z-10 shadow-lg pointer-events-none">
+                  <span>Interact</span>
+                  <span className="material-symbols-outlined text-[10px]">north_east</span>
+                </div>
               </div>
             </div>
           </div>
@@ -1029,7 +1050,7 @@ export default function Page() {
                   id="cert-container"
                 >
                 <a
-                  className="nav-link flex-shrink-0 w-80 p-8 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group"
+                  className="nav-link relative flex-shrink-0 w-80 p-8 pb-16 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group/card"
                   href="/assets/Microsoft_Azure_AI_Fundamentals.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -1037,16 +1058,19 @@ export default function Page() {
                   <div className="text-[10px] font-bold text-accent mb-4 tracking-[0.2em]">
                     MICROSOFT
                   </div>
-                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover:text-accent transition-colors">
+                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover/card:text-accent transition-colors">
                     Azure AI Fundamentals (AI-900)
                   </h4>
                   <p className="text-xs text-[var(--text-muted)]">
                     Credential ID: d9xp-DwW2
                   </p>
+                  <div className="absolute bottom-6 right-6 flex items-center gap-1 text-[9px] font-bold text-accent tracking-[0.2em] uppercase opacity-50 group-hover/card:opacity-100 transition-opacity">
+                    Click to view <span className="material-symbols-outlined text-[10px]">north_east</span>
+                  </div>
                 </a>
                 
                 <a
-                  className="nav-link flex-shrink-0 w-80 p-8 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group"
+                  className="nav-link relative flex-shrink-0 w-80 p-8 pb-16 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group/card"
                   href="/assets/AWS_Academy_Cloud_Architecture.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -1054,16 +1078,19 @@ export default function Page() {
                   <div className="text-[10px] font-bold text-accent mb-4 tracking-[0.2em]">
                     AWS
                   </div>
-                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover:text-accent transition-colors">
+                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover/card:text-accent transition-colors">
                     AWS Academy Cloud Architecting
                   </h4>
                   <p className="text-xs text-[var(--text-muted)]">
                     Amazon Web Services Foundations
                   </p>
+                  <div className="absolute bottom-6 right-6 flex items-center gap-1 text-[9px] font-bold text-accent tracking-[0.2em] uppercase opacity-50 group-hover/card:opacity-100 transition-opacity">
+                    Click to view <span className="material-symbols-outlined text-[10px]">north_east</span>
+                  </div>
                 </a>
                 
                 <a
-                  className="nav-link flex-shrink-0 w-80 p-8 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group"
+                  className="nav-link relative flex-shrink-0 w-80 p-8 pb-16 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group/card"
                   href="/assets/Coursera_Project_Management.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -1071,16 +1098,19 @@ export default function Page() {
                   <div className="text-[10px] font-bold text-accent mb-4 tracking-[0.2em]">
                     GOOGLE
                   </div>
-                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover:text-accent transition-colors">
+                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover/card:text-accent transition-colors">
                     Project Management Foundations
                   </h4>
                   <p className="text-xs text-[var(--text-muted)]">
                     Agile &amp; Waterfall Methodologies
                   </p>
+                  <div className="absolute bottom-6 right-6 flex items-center gap-1 text-[9px] font-bold text-accent tracking-[0.2em] uppercase opacity-50 group-hover/card:opacity-100 transition-opacity">
+                    Click to view <span className="material-symbols-outlined text-[10px]">north_east</span>
+                  </div>
                 </a>
                 
                 <a
-                  className="nav-link flex-shrink-0 w-80 p-8 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group"
+                  className="nav-link relative flex-shrink-0 w-80 p-8 pb-16 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group/card"
                   href="/assets/Coursera_Digital_Media_and_Marketing_Stategies.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -1088,16 +1118,19 @@ export default function Page() {
                   <div className="text-[10px] font-bold text-accent mb-4 tracking-[0.2em]">
                     UNIVERSITY OF ILLINOIS
                   </div>
-                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover:text-accent transition-colors">
+                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover/card:text-accent transition-colors">
                     Digital Media &amp; Marketing Strategies
                   </h4>
                   <p className="text-xs text-[var(--text-muted)]">
                     Analytics and Consumer Behavior
                   </p>
+                  <div className="absolute bottom-6 right-6 flex items-center gap-1 text-[9px] font-bold text-accent tracking-[0.2em] uppercase opacity-50 group-hover/card:opacity-100 transition-opacity">
+                    Click to view <span className="material-symbols-outlined text-[10px]">north_east</span>
+                  </div>
                 </a>
 
                 <a
-                  className="nav-link flex-shrink-0 w-80 p-8 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group"
+                  className="nav-link relative flex-shrink-0 w-80 p-8 pb-16 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group/card"
                   href="/assets/Coursera_OOP.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -1105,16 +1138,19 @@ export default function Page() {
                   <div className="text-[10px] font-bold text-accent mb-4 tracking-[0.2em]">
                     LEARNQUEST
                   </div>
-                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover:text-accent transition-colors">
+                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover/card:text-accent transition-colors">
                     Object-Oriented Programming with Java
                   </h4>
                   <p className="text-xs text-[var(--text-muted)]">
                     Software Engineering and Design
                   </p>
+                  <div className="absolute bottom-6 right-6 flex items-center gap-1 text-[9px] font-bold text-accent tracking-[0.2em] uppercase opacity-50 group-hover/card:opacity-100 transition-opacity">
+                    Click to view <span className="material-symbols-outlined text-[10px]">north_east</span>
+                  </div>
                 </a>
 
                 <a
-                  className="nav-link flex-shrink-0 w-80 p-8 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group"
+                  className="nav-link relative flex-shrink-0 w-80 p-8 pb-16 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group/card"
                   href="/assets/Coursera_Python.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -1122,16 +1158,19 @@ export default function Page() {
                   <div className="text-[10px] font-bold text-accent mb-4 tracking-[0.2em]">
                     UNIVERSITY OF MICHIGAN
                   </div>
-                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover:text-accent transition-colors">
+                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover/card:text-accent transition-colors">
                     Python Programming
                   </h4>
                   <p className="text-xs text-[var(--text-muted)]">
                     Data Structures &amp; Algorithms
                   </p>
+                  <div className="absolute bottom-6 right-6 flex items-center gap-1 text-[9px] font-bold text-accent tracking-[0.2em] uppercase opacity-50 group-hover/card:opacity-100 transition-opacity">
+                    Click to view <span className="material-symbols-outlined text-[10px]">north_east</span>
+                  </div>
                 </a>
 
                 <a
-                  className="nav-link flex-shrink-0 w-80 p-8 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group"
+                  className="nav-link relative flex-shrink-0 w-80 p-8 pb-16 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group/card"
                   href="/assets/Suyash_Agrawal_Wadhwani_Certificate.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -1139,12 +1178,15 @@ export default function Page() {
                   <div className="text-[10px] font-bold text-accent mb-4 tracking-[0.2em]">
                     WADHWANI FOUNDATION
                   </div>
-                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover:text-accent transition-colors">
+                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover/card:text-accent transition-colors">
                     Wadhwani Employability Skills
                   </h4>
                   <p className="text-xs text-[var(--text-muted)]">
                     Core Business &amp; Soft Skills
                   </p>
+                  <div className="absolute bottom-6 right-6 flex items-center gap-1 text-[9px] font-bold text-accent tracking-[0.2em] uppercase opacity-50 group-hover/card:opacity-100 transition-opacity">
+                    Click to view <span className="material-symbols-outlined text-[10px]">north_east</span>
+                  </div>
                 </a>
               </div>
 
@@ -1158,6 +1200,11 @@ export default function Page() {
                   <div className="w-0 h-0 border-y-[6px] border-y-transparent border-l-[8px] border-l-[var(--text-muted)] ml-1 group-hover/btn:border-l-[var(--primary)] transition-colors" />
                 </button>
               )}
+              
+              {/* Swipe Indicator */}
+              <div className="mt-4 flex items-center justify-center text-accent opacity-60 animate-pulse">
+                <span className="text-[10px] font-bold tracking-[0.3em] uppercase">&larr; SWIPE &rarr;</span>
+              </div>
             </div>
             </Reveal>
           </div>
@@ -1168,7 +1215,7 @@ export default function Page() {
           FOOTER — bg-[var(--surface-dark)], py-40=160px
           ════════════════════════════════════ */}
       <footer
-        className="bg-surface-darker py-40 px-8 border-t border-[var(--border-color)]"
+        className="bg-surface-darker py-20 md:py-40 px-8 border-t border-[var(--border-color)]"
         id="contact"
       >
         <div className="max-w-7xl mx-auto">
@@ -1183,7 +1230,7 @@ export default function Page() {
                 collaborations.
               </p>
               {/* text-7xl=72px md:text-9xl=128px leading-[0.9] */}
-              <h2 className="font-headline text-7xl md:text-9xl font-black text-[var(--text)] leading-[0.9] hover-green transition-colors">
+              <h2 className="font-headline text-5xl md:text-9xl font-black text-[var(--text)] leading-[0.9] hover-green transition-colors">
                 LET&apos;S
                 <br />
                 CONNECT.
@@ -1270,9 +1317,9 @@ export default function Page() {
           </Reveal>
 
           {/* Bottom bar: mt-32=128px pt-12=48px text-[10px] tracking-[0.4em] */}
-          <div className="mt-32 pt-12 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center text-[10px] tracking-[0.4em] text-[var(--text-muted)] uppercase">
+          <div className="mt-16 md:mt-32 pt-8 md:pt-12 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-start md:items-center text-[8px] md:text-[10px] tracking-[0.2em] md:tracking-[0.4em] text-[var(--text-muted)] uppercase gap-3">
             <div>© 2026 SUYASH AGRAWAL. ALL RIGHTS RESERVED.</div>
-            <div className="mt-4 md:mt-0 text-[var(--text-muted)]">
+            <div className="text-[var(--text-muted)]">
               DESIGNED FOR INNOVATION &amp; SCALE.
             </div>
           </div>

@@ -15,7 +15,7 @@ export default function Contact() {
           <div>
             <h3 className="text-[var(--primary)] font-bold tracking-[0.4em] uppercase mb-4 text-xs">Ready for impact?</h3>
             <p className="text-[var(--text-muted)] font-medium mb-8 max-w-md">I'm currently open to full-time roles, contracts, and collaborations.</p>
-            <h2 className="font-headline text-6xl md:text-8xl lg:text-9xl font-black text-[var(--text)] leading-[0.9] hover:text-[var(--primary)] transition-colors duration-500 cursor-default">LET'S<br/>CONNECT.</h2>
+            <h2 className="font-headline text-5xl md:text-8xl lg:text-9xl font-black text-[var(--text)] leading-[0.9] hover:text-[var(--primary)] transition-colors duration-500 cursor-default">LET'S<br/>CONNECT.</h2>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:max-w-xl">

@@ -64,7 +64,7 @@ I build full-stack intelligent applications using a modern, reactive stack:
 
 ## 💼 Professional Experience
 
-### **AI Developer Intern**
+### **AI Engineer Intern**
 #### *Appiness Interactive Private Limited* — Bengaluru, India
 *Jan 2026 – Present*
 - **Enterprise-grade Agentic Workflows:** Architecting resilient multi-step agentic workflows and LLM orchestration layers to automate complex company processes.
