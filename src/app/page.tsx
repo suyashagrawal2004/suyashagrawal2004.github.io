@@ -697,7 +697,7 @@ export default function Page() {
                 </div>
 
                 <a
-                  className="nav-link relative block overflow-hidden rounded-[28px] border border-[var(--border-color)] bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] px-8 py-7 transition-colors hover:border-accent-40 md:col-span-2 lg:col-span-1"
+                  className="nav-link relative block overflow-hidden rounded-[28px] border border-[var(--border-color)] bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] px-8 pt-7 pb-16 transition-colors hover:border-accent-40 md:col-span-2 lg:col-span-1 group/card"
                   href="/assets/Blood_Donation_Camp_Appreciation_Letter.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -708,7 +708,7 @@ export default function Page() {
                     <div className="text-[10px] font-bold text-accent tracking-[0.24em] uppercase mb-3">
                       Leadership &amp; Social Impact
                     </div>
-                    <h3 className="text-lg font-bold text-[var(--text)] mb-2">
+                    <h3 className="text-lg font-bold text-[var(--text)] mb-2 group-hover/card:text-accent transition-colors">
                       Organised Blood Donation Camp
                     </h3>
                     <div className="text-xs font-bold tracking-[0.16em] text-[var(--text-muted)] uppercase mb-4">
@@ -722,6 +722,9 @@ export default function Page() {
                     <p className="text-sm text-[var(--text-muted)] leading-relaxed">
                       Led a community blood donation drive in collaboration with the Indian Red Cross Society as part of a student-led social impact effort.
                     </p>
+                  </div>
+                  <div className="absolute bottom-6 right-8 flex items-center gap-1 text-[9px] font-bold text-accent tracking-[0.2em] uppercase opacity-50 group-hover/card:opacity-100 transition-opacity">
+                    Click to view <span className="material-symbols-outlined text-[10px]">north_east</span>
                   </div>
                 </a>
               </div>
