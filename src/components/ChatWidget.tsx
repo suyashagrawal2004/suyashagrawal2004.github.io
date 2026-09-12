@@ -2,6 +2,22 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { PROJECTS, SKILL_GROUPS } from "@/data/portfolio";
+
+const SKILLS_PROMPT = SKILL_GROUPS.map(
+  (group) => `- **${group.title}:** ${group.skills.join(", ")}`
+).join("\n");
+
+const PROJECTS_PROMPT = PROJECTS.map((project) =>
+  [
+    `- **${project.title}** (${[project.category, project.context].filter(Boolean).join(", ")}): ${project.description ?? project.summary}`,
+    `  - Tech: ${project.stack.join(", ")}`,
+    ...(project.highlights ?? []).map(
+      (highlight) => `  - ${highlight.replace(/^My contribution:/, "Suyash's contribution:")}`
+    ),
+    ...(project.url ? [`  - Live at: ${project.url}`] : []),
+  ].join("\n")
+).join("\n");
 
 /* ─── Knowledge Base System Prompt ───────────────────────────────────────────
    Comprehensive info about Suyash so Gemini can answer any question about him.
@@ -15,7 +31,7 @@ const SYSTEM_PROMPT = `You are the personal AI assistant for Suyash Agrawal. You
 
 ## About Suyash Agrawal
 - **Full Name:** Suyash Agrawal
-- **Role:** AI Engineer / AI Product Manager / Generative AI Specialist / Workflow Automation Expert
+- **Role:** AI/ML Engineer / AI Product Manager / Generative AI Specialist / Full-Stack AI Builder
 - **Availability:** Open to Immediate Relocation | India & Worldwide
 - **Open to:** Full-time roles, contracts, and collaborations
 - **Email:** dm.suyash.a@gmail.com
@@ -24,30 +40,28 @@ const SYSTEM_PROMPT = `You are the personal AI assistant for Suyash Agrawal. You
 - **GitHub:** github.com/suyashagrawal2004
 
 ## Current Experience
-- **AI Engineer Intern** at Appiness Interactive Private Limited (Jan 2026 – Present)
+- **AI/ML Engineer** at Appiness Interactive Private Limited (Jan 2026 – Present)
   - Location: Bengaluru, KA, India
   - Developing enterprise-grade agentic workflows and LLM orchestration layers
   - Focused on improving retrieval accuracy and multi-step reasoning capabilities
+  - Contributes to team-built production AI products: Vola (AI voice agent platform), Saha (omnichannel AI agent platform) and Smart Physio (clinic management SaaS)
 
 ## Education
 - **B.Tech in Computer Science Engineering (Core)** – VIT-AP University (2022–2026)
   - Location: Amaravati, AP, India
-  - CGPA: 8.5 / 10.0
+  - CGPA: 8.52 / 10.0
 - **Higher Secondary – 12th (CBSE)** – Deens Academy (2020–2022)
   - Science Stream (PCMC): Physics, Chemistry, Mathematics, Computer Science | Score: 92.8%
 - **Secondary – 10th (CBSE)** – Deens Academy (2008–2020)
   - Score: 94.4% — Academic Excellence
 
 ## Technical Skills
-- **AI & Automation:** LLM Orchestration, AI Agents, Generative AI, Prompt Engineering, Vercel AI SDK
-- **Languages:** TypeScript, JavaScript, Python, Java, SQL
-- **Frameworks:** Next.js, Node.js, React, Express.js
-- **Tools:** Git/GitHub, Vercel, Azure AI, AWS
+${SKILLS_PROMPT}
 
-## Projects
-- **Music Maestro** (Live): An AI-powered app that turns your mood or prompt into a Spotify playlist automatically. Live at: https://music-maestro-lyart.vercel.app/
-- **MixNMatch** (Live): An interactive, keyboard-controlled web drum machine and loop station powered by the Web Audio API. Live at: https://mix-n-match-ten.vercel.app/
-- **Stonks** (Live): A real-time fintech dashboard featuring a RAG-powered AI assistant for smart mutual fund insights. Live at: https://stonks-omega-red.vercel.app/
+## Projects (in order of prominence)
+Projects marked "Solo Build" were designed and built entirely by Suyash. Projects marked "Team · Appiness Interactive" were built with his team at work, so only attribute to him the specific contributions listed for them.
+${PROJECTS_PROMPT}
+
 ## Certifications
 - Microsoft Azure AI Fundamentals (AI-900)
 - AWS Academy Cloud Architecting
@@ -77,7 +91,7 @@ interface Message {
 
 const SUGGESTED_QUESTIONS = [
   "What are his top skills?",
-  "Tell me about his education.",
+  "What has he built recently?",
   "How can I contact him?",
 ];
 

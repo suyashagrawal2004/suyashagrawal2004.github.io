@@ -294,8 +294,8 @@ body {
 /* ═══════════════════════════════════════════════════
    10. HORIZONTAL SCROLL PROJECTS — Exact Stitch
    ═══════════════════════════════════════════════════ */
+/* Height is set inline from the project count so scroll speed stays constant */
 .horizontal-scroll-container {
-  height: 350vh;
   position: relative;
   margin-top: 10vh;
 }
@@ -338,7 +338,7 @@ body {
 .project-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(transparent, rgba(0,0,0,0.9));
+  background: linear-gradient(transparent, color-mix(in srgb, var(--surface-darker) 92%, transparent));
   opacity: 0;
   transition: opacity 0.4s ease;
   display: flex;
@@ -347,6 +347,37 @@ body {
   padding: 2.5rem;
 }
 .project-card:hover .project-overlay { opacity: 1; }
+
+/* Typographic cover for projects without a screenshot */
+.project-cover {
+  background:
+    radial-gradient(circle at 85% 10%, color-mix(in srgb, var(--primary) 16%, transparent), transparent 55%),
+    radial-gradient(color-mix(in srgb, var(--text) 9%, transparent) 1px, transparent 1.5px) 0 0 / 22px 22px,
+    var(--surface-variant);
+}
+.project-cover .project-cover-icon {
+  position: absolute;
+  right: -1.5rem;
+  bottom: -2.5rem;
+  font-size: 9rem;
+  line-height: 1;
+  color: var(--primary);
+  opacity: 0.08;
+  font-variation-settings: 'wght' 200;
+  pointer-events: none;
+  transition: transform 0.7s ease, opacity 0.7s ease;
+}
+@media (min-width: 769px) {
+  .project-cover .project-cover-icon {
+    right: -2rem;
+    bottom: -4rem;
+    font-size: 16rem;
+  }
+}
+.project-card:hover .project-cover-icon {
+  transform: rotate(-8deg) scale(1.08);
+  opacity: 0.14;
+}
 
 /* ═══════════════════════════════════════════════════
    12. THEME SWITCHER PILL — Exact Stitch

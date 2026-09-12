@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local project analysis notes (private) and Claude Code preview config
+/all_project_analysis/
+/.claude/

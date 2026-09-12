@@ -8,8 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Canvas, useFrame } from "@react-three/fiber";
-import * as THREE from "three";
+import { PROJECTS, SKILL_GROUPS, type Project } from "@/data/portfolio";
 
 /* ═══════════════════════════════════════════════════
    CONSTANTS — Exact Stitch hex codes
@@ -17,20 +16,7 @@ import * as THREE from "three";
 const THEMES = ["default", "lavender", "catppuccin"] as const;
 type Theme = (typeof THEMES)[number];
 
-const ACCENT_HEX: Record<Theme, string> = {
-  default: "#f3ffca",
-  lavender: "#3b0764",
-  catppuccin: "#8b5523",
-};
-
-const GEAR_IMG = "/assets/gear.png";
-const CURSOR_IMG = "/assets/cursor.png";
 const HERO_IMG = "/assets/suyash_photo.jpg";
-const PROJECT_IMGS = [
-  "/assets/project-music-maestro.png",
-  "/assets/project-mix-n-match.png",
-  "/assets/project-stonks.png",
-];
 
 /* ═══════════════════════════════════════════════════
    TypingText — Exact Stitch: 80ms/char, threshold 0.2
@@ -138,46 +124,25 @@ function Reveal({
 }
 
 /* ═══════════════════════════════════════════════════
-   R3F Scene — Theme-reactive wireframe icosahedron
-   ═══════════════════════════════════════════════════ */
-function SceneContent({ accentColor }: { accentColor: string }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const color = useRef(new THREE.Color(accentColor));
-
-  useEffect(() => {
-    color.current.set(accentColor);
-  }, [accentColor]);
-
-  useFrame((state) => {
-    if (!meshRef.current) return;
-    meshRef.current.rotation.x = state.clock.elapsedTime * 0.15;
-    meshRef.current.rotation.y = state.clock.elapsedTime * 0.25;
-    const mat = meshRef.current.material as THREE.MeshBasicMaterial;
-    mat.color.lerp(color.current, 0.05);
-  });
-
-  return (
-    <mesh ref={meshRef}>
-      <icosahedronGeometry args={[2.2, 1]} />
-      <meshBasicMaterial wireframe color={accentColor} />
-    </mesh>
-  );
-}
-
-/* ═══════════════════════════════════════════════════
    PROJECT MODAL — Exact Stitch structure
    ═══════════════════════════════════════════════════ */
 function ProjectModal({
-  title,
-  desc,
-  url,
+  project,
   onClose,
 }: {
-  title: string;
-  desc: string;
-  url?: string;
+  project: Project;
   onClose: () => void;
 }) {
+  const { title, url, stats, highlights } = project;
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
+
   return (
     <motion.div
       className="fixed inset-0 z-[100]"
@@ -186,16 +151,24 @@ function ProjectModal({
       exit={{ opacity: 0 }}
     >
       <div className="absolute inset-0 modal-backdrop" onClick={onClose} />
-      <div className="relative w-full h-full flex items-center justify-center p-4 md:p-8">
-        <div className="bg-[var(--surface-variant)] border border-[var(--border-color)] w-full max-w-6xl h-[90vh] rounded-3xl overflow-hidden flex flex-col shadow-2xl">
+      <div className="relative w-full h-full flex items-center justify-center p-4 md:p-8 pointer-events-none">
+        <div className="pointer-events-auto bg-[var(--surface-variant)] border border-[var(--border-color)] w-full max-w-6xl h-[90vh] rounded-3xl overflow-hidden flex flex-col shadow-2xl">
           <div className="p-6 md:p-8 border-b border-[var(--border-color)]">
-            <div className="flex justify-between items-center mb-2">
-              <h3 className="text-2xl md:text-3xl font-headline font-bold text-themed">
-                {title}
-              </h3>
-              <div className="flex gap-4">
+            <div className="flex justify-between items-start gap-4 mb-2">
+              <div>
+                <div className="text-[10px] font-bold tracking-[0.25em] uppercase text-accent mb-2">
+                  {project.category}
+                  {project.context && (
+                    <span className="text-[var(--text-muted)]"> · {project.context}</span>
+                  )}
+                </div>
+                <h3 className="text-2xl md:text-3xl font-headline font-bold text-themed">
+                  {title}
+                </h3>
+              </div>
+              <div className="flex gap-4 shrink-0">
                 {url && (
-                  <a 
+                  <a
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -210,40 +183,183 @@ function ProjectModal({
                 <button
                   className="nav-link w-10 h-10 flex items-center justify-center bg-red-500/20 text-red-500 rounded-lg hover:bg-red-500/30 transition-all"
                   onClick={onClose}
+                  aria-label="Close project"
                 >
                   <span className="material-symbols-outlined">close</span>
                 </button>
               </div>
             </div>
             <p className="text-sm md:text-base text-[var(--text-muted)] max-w-3xl leading-relaxed">
-              {desc}
+              {project.description ?? project.summary}
             </p>
           </div>
-          <div className="flex-1 overflow-hidden flex flex-col">
-            <div className="flex-1 p-4 md:p-6">
-              <div className="w-full h-full bg-black/40 rounded-2xl border border-[var(--border-color)] overflow-hidden shadow-inner">
-                {url ? (
-                  <iframe 
+          {url ? (
+            <div className="flex-1 overflow-hidden flex flex-col">
+              <div className="flex-1 p-4 md:p-6">
+                <div className="w-full h-full bg-black/40 rounded-2xl border border-[var(--border-color)] overflow-hidden shadow-inner">
+                  <iframe
                     src={url}
                     className="w-[133.33%] h-[133.33%] border-0 origin-top-left scale-[0.75]"
                     title={title}
                   />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-[var(--text-muted)] italic">
-                    <div className="text-center">
-                      <span className="material-symbols-outlined text-6xl mb-4 block">
-                        terminal
-                      </span>
-                      <p>Interactive Emulator Placeholder</p>
-                    </div>
-                  </div>
-                )}
+                </div>
               </div>
+            </div>
+          ) : (
+            <div className="flex-1 overflow-y-auto overscroll-contain p-6 md:p-8 space-y-10">
+              {stats && (
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {stats.map((stat) => (
+                    <div
+                      key={stat.label}
+                      className="p-6 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl"
+                    >
+                      <div className="font-headline text-3xl md:text-4xl font-bold leading-none text-accent">
+                        {stat.value}
+                      </div>
+                      <div className="mt-3 text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--text-muted)]">
+                        {stat.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {highlights && (
+                <div>
+                  <h4 className="text-[13px] font-bold text-accent tracking-[0.15em] uppercase mb-5">
+                    Engineering Highlights
+                  </h4>
+                  <ul className="grid md:grid-cols-2 gap-4">
+                    {highlights.map((highlight) => (
+                      <li
+                        key={highlight}
+                        className="flex gap-3 p-5 bg-white/[0.02] border border-[var(--border-color)] rounded-2xl text-sm text-[var(--text-muted)] leading-relaxed"
+                      >
+                        <span className="mt-2 w-1.5 h-1.5 shrink-0 rounded-full bg-[var(--primary)]" />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <div>
+                <h4 className="text-[13px] font-bold text-accent tracking-[0.15em] uppercase mb-5">
+                  Tech Stack
+                </h4>
+                <div className="flex flex-wrap gap-2.5">
+                  {project.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   PROJECT COVER — typographic card face for projects
+   without a screenshot (stats swap to summary on hover)
+   ═══════════════════════════════════════════════════ */
+function ProjectCover({ project, index }: { project: Project; index: number }) {
+  return (
+    <div className="project-cover absolute inset-0 flex flex-col justify-between p-6 pb-12 md:p-10">
+      <span className="material-symbols-outlined project-cover-icon" aria-hidden="true">
+        {project.icon}
+      </span>
+      <div className="relative flex items-start justify-between gap-4">
+        <span className="text-[9px] md:text-[10px] font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase text-accent">
+          {String(index + 1).padStart(2, "0")} / {project.category}
+        </span>
+        {project.context && (
+          <span className="hidden md:inline-block shrink-0 px-3 py-1 rounded-full border border-[var(--border-color)] text-[9px] font-bold tracking-[0.2em] uppercase text-[var(--text-muted)]">
+            {project.context}
+          </span>
+        )}
+      </div>
+      <div className="relative">
+        <h4 className="font-headline text-3xl md:text-6xl font-bold tracking-tighter leading-none text-[var(--text)]">
+          {project.title}
+        </h4>
+        <div className="relative hidden md:block mt-6 pt-5 min-h-[96px] border-t border-[var(--border-color)]">
+          <div className="grid grid-cols-3 gap-6 transition-opacity duration-300 group-hover:opacity-0">
+            {project.stats?.map((stat) => (
+              <div key={stat.label}>
+                <div className="font-headline text-2xl font-bold leading-none text-accent">
+                  {stat.value}
+                </div>
+                <div className="mt-2 text-[9px] font-bold tracking-[0.15em] uppercase text-[var(--text-muted)]">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="absolute inset-x-0 top-5 opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+            <p className="text-sm text-[var(--text-muted)] leading-relaxed line-clamp-2 mb-3">
+              {project.summary}
+            </p>
+            <div className="flex items-center gap-2 text-accent text-[10px] font-bold uppercase tracking-[0.3em]">
+              View Case Study{" "}
+              <span className="material-symbols-outlined text-sm">north_east</span>
             </div>
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
+  );
+}
+
+function ProjectCard({
+  project,
+  index,
+  onOpen,
+}: {
+  project: Project;
+  index: number;
+  onOpen: () => void;
+}) {
+  return (
+    <div className="project-card nav-link group" onClick={onOpen}>
+      {project.image ? (
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            src={project.image}
+            alt={project.title}
+          />
+          <div className="project-overlay">
+            <h4 className="text-4xl font-headline font-bold text-[var(--text)] mb-2 group-hover:text-accent transition-colors">
+              {project.title}
+            </h4>
+            <p className="text-[var(--text-muted)] mb-8 text-sm">
+              {project.summary}
+            </p>
+            <div className="flex items-center gap-2 text-accent text-[10px] font-bold uppercase tracking-[0.3em]">
+              Click to Interact{" "}
+              <span className="material-symbols-outlined text-sm">
+                north_east
+              </span>
+            </div>
+          </div>
+        </>
+      ) : (
+        <ProjectCover project={project} index={index} />
+      )}
+      {/* Mobile-only always-on badge */}
+      <div className="absolute bottom-4 right-4 md:hidden flex items-center gap-1.5 px-3 py-1.5 bg-[var(--surface-darker)] border border-accent-40 rounded-full text-accent text-[9px] font-bold uppercase tracking-widest z-10 shadow-lg pointer-events-none">
+        <span>{project.url ? "Interact" : "Details"}</span>
+        <span className="material-symbols-outlined text-[10px]">north_east</span>
+      </div>
+    </div>
   );
 }
 
@@ -300,11 +416,7 @@ export default function Page() {
   }, []);
 
   /* ── Modal ── */
-  const [modal, setModal] = useState<{
-    title: string;
-    desc: string;
-    url?: string;
-  } | null>(null);
+  const [modal, setModal] = useState<Project | null>(null);
 
   /* ── Refs for imperative scroll logic (exact Stitch JS) ── */
   const progressBarRef = useRef<HTMLDivElement>(null);
@@ -364,13 +476,16 @@ export default function Page() {
         }
       }
 
-      /* Horizontal project scroll (exact Stitch formula) */
+      /* Horizontal project scroll — clamped so fast scrolls still land on the first/last card */
       const hs = horizontalSectionRef.current;
       const pt = projectTrackRef.current;
       if (hs && pt) {
         const hr = hs.getBoundingClientRect();
-        if (hr.top <= 0 && hr.bottom >= window.innerHeight) {
-          const percent = -hr.top / (hr.height - window.innerHeight);
+        if (hr.top <= window.innerHeight && hr.bottom >= 0) {
+          const percent = Math.min(
+            Math.max(-hr.top / (hr.height - window.innerHeight), 0),
+            1
+          );
           const total =
             pt.scrollWidth - window.innerWidth + window.innerWidth * 0.2;
           pt.style.transform = `translateX(-${percent * total}px)`;
@@ -556,21 +671,23 @@ export default function Page() {
               
               <Reveal className="mb-8 h-[24px]">
                 <span className="text-sm md:text-base font-bold tracking-[0.5em] text-[var(--text-muted)] uppercase flex items-center">
-                  <MultiTypingText texts={["AI Engineer","AI Product Manager", "Generative AI Specialist", "Workflow Automation"] as const} />
+                  <MultiTypingText texts={["AI/ML Engineer", "AI Product Manager", "Generative AI Specialist", "Full-Stack AI Builder"] as const} />
                   <span className="typing-cursor h-4 ml-1" />
                 </span>
               </Reveal>
 
               <Reveal>
                 <p className="text-lg md:text-xl text-[var(--text-muted)] max-w-xl leading-relaxed">
-                  Building resilient{" "}
-                  <span className="text-[var(--text)] font-medium">LLM systems</span>{" "}
+                  Building production-grade{" "}
+                  <span className="text-[var(--text)] font-medium">LLM systems</span>,{" "}
+                  <span className="text-[var(--text)] font-medium">
+                    Voice AI Agents
+                  </span>{" "}
                   and{" "}
                   <span className="text-[var(--text)] font-medium">
-                    Autonomous Agents
+                    multi-tenant SaaS
                   </span>
-                  . Currently architecting intelligent workflows for
-                  international scale.
+                  , end to end from database schema to deployment.
                 </p>
               </Reveal>
 
@@ -617,87 +734,29 @@ export default function Page() {
             {/* Grid: p-10=40px, border-[var(--border-color)], text-sm=14px, text-xs=12px, space-y-2=8px */}
             <Reveal>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* AI & Automation */}
-                <div className="p-8 bg-white/[0.02] border border-[var(--border-color)] rounded-[20px] transition-colors hover:border-[var(--border-color)]">
-                  <h3 className="text-[13px] font-bold text-accent tracking-[0.15em] mb-6 uppercase">
-                    AI &amp; Automation
-                  </h3>
-                  <div className="flex flex-wrap gap-2.5">
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">LLM Orchestration</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">AI Agents</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Generative AI</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Prompt Engineering</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Vercel AI SDK</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Hugging Face</span>
+                {SKILL_GROUPS.map((group) => (
+                  <div
+                    key={group.title}
+                    className="p-8 bg-white/[0.02] border border-[var(--border-color)] rounded-[20px] transition-colors hover:border-[var(--border-color)]"
+                  >
+                    <h3 className="text-[13px] font-bold text-accent tracking-[0.15em] mb-6 uppercase">
+                      {group.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-2.5">
+                      {group.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-
-                {/* Languages */}
-                <div className="p-8 bg-white/[0.02] border border-[var(--border-color)] rounded-[20px] transition-colors hover:border-[var(--border-color)]">
-                  <h3 className="text-[13px] font-bold text-accent tracking-[0.15em] mb-6 uppercase">
-                    Languages
-                  </h3>
-                  <div className="flex flex-wrap gap-2.5">
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">TypeScript</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">JavaScript</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Python</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Java</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">SQL</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">HTML/CSS</span>
-                  </div>
-                </div>
-
-                {/* Frameworks */}
-                <div className="p-8 bg-white/[0.02] border border-[var(--border-color)] rounded-[20px] transition-colors hover:border-[var(--border-color)]">
-                  <h3 className="text-[13px] font-bold text-accent tracking-[0.15em] mb-6 uppercase">
-                    Frameworks
-                  </h3>
-                  <div className="flex flex-wrap gap-2.5">
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Next.js</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Node.js</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">React</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Express.js</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">NumPy</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Pandas</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">OpenCV</span>
-                  </div>
-                </div>
-
-                {/* APIs & Services */}
-                <div className="p-8 bg-white/[0.02] border border-[var(--border-color)] rounded-[20px] transition-colors hover:border-[var(--border-color)]">
-                  <h3 className="text-[13px] font-bold text-accent tracking-[0.15em] mb-6 uppercase">
-                    APIs &amp; Services
-                  </h3>
-                  <div className="flex flex-wrap gap-2.5">
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">OpenAI</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Anthropic</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">ElevenLabs</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Spotify API</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">WABA API</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">OAuth 2.0</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">REST APIs</span>
-                  </div>
-                </div>
-
-                {/* Tools & Cloud */}
-                <div className="p-8 bg-white/[0.02] border border-[var(--border-color)] rounded-[20px] transition-colors hover:border-[var(--border-color)]">
-                  <h3 className="text-[13px] font-bold text-accent tracking-[0.15em] mb-6 uppercase">
-                    Tools &amp; Cloud
-                  </h3>
-                  <div className="flex flex-wrap gap-2.5">
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Git/GitHub</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Vercel</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Render</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">MySQL</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Postman</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">VS Code</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">Azure AI</span>
-                    <span className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]">AWS</span>
-                  </div>
-                </div>
+                ))}
 
                 <a
-                  className="nav-link relative block overflow-hidden rounded-[28px] border border-[var(--border-color)] bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] px-8 pt-7 pb-16 transition-colors hover:border-accent-40 md:col-span-2 lg:col-span-1 group/card"
+                  className="nav-link relative block overflow-hidden rounded-[28px] border border-[var(--border-color)] bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] px-8 pt-7 pb-16 transition-colors hover:border-accent-40 md:col-span-2 lg:col-span-3 group/card"
                   href="/assets/Blood_Donation_Camp_Appreciation_Letter.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -719,7 +778,7 @@ export default function Page() {
                       <span className="h-1 w-1 rounded-full bg-[var(--primary)]" />
                       <span>Nov 2025</span>
                     </div>
-                    <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+                    <p className="text-sm text-[var(--text-muted)] leading-relaxed max-w-2xl">
                       Led a community blood donation drive in collaboration with the Indian Red Cross Society as part of a student-led social impact effort.
                     </p>
                   </div>
@@ -764,7 +823,7 @@ export default function Page() {
                     JAN 2026 - PRESENT
                   </div>
                   <h4 className="text-2xl font-bold text-[var(--text)] mb-2 hover-green transition-colors">
-                    AI Engineer Intern
+                    AI/ML Engineer
                   </h4>
                   <div className="mb-4">
                     <p className="text-[var(--text-muted)] font-medium">
@@ -776,9 +835,9 @@ export default function Page() {
                   </div>
                   <p className="text-sm text-[var(--text-muted)] leading-relaxed max-w-md md:ml-auto">
                     Developing enterprise-grade agentic workflows and LLM
-                    orchestration layers. Focused on improving retrieval accuracy{" "}
-                    <br className="hidden md:block" />
-                    and multi-step reasoning capabilities.
+                    orchestration layers, and contributing to production AI
+                    products: Vola (voice agents), Saha (omnichannel agents)
+                    and Smart Physio (clinic SaaS).
                   </p>
                 </Reveal>
                 {/* Node: w-4=16px h-4=16px border-2 */}
@@ -807,7 +866,7 @@ export default function Page() {
                   </div>
                   <div className="p-4 bg-[var(--border-color)] rounded-2xl border border-[var(--border-color)] inline-block">
                     <span className="text-accent font-bold">
-                      8.5 / 10.0
+                      8.52 / 10.0
                     </span>{" "}
                     <span className="text-[var(--text-muted)] ml-2">CGPA</span>
                   </div>
@@ -889,11 +948,12 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ── PROJECTS ── horizontal-scroll-container: 350vh, mt: 10vh */}
+        {/* ── PROJECTS ── horizontal-scroll-container: height scales with card count, mt: 10vh */}
         <section
           className="horizontal-scroll-container"
           id="projects"
           ref={horizontalSectionRef}
+          style={{ height: `${100 + PROJECTS.length * 75}vh` }}
         >
           <div className="sticky-wrapper">
             {/* Title overlay */}
@@ -903,124 +963,19 @@ export default function Page() {
                 <span className="typing-cursor" />
               </h2>
             </div>
-            {/* Track: gap 3rem=48px, padding 0 10vw, mt-40=160px md:mt-20=80px */}
+            {/* Track: gap 3rem=48px, padding 0 10vw */}
             <div
               className="project-track mt-64 md:mt-64"
               ref={projectTrackRef}
             >
-              {/* Card 1: Music Maestro — 450×600, rounded-2rem=32px, duration-700 */}
-              <div
-                className="project-card nav-link group"
-                onClick={() =>
-                  setModal({
-                    title: "Music Maestro",
-                    desc: "An AI-powered app that turns your mood or prompt into a Spotify playlist automatically.",
-                    url: "https://music-maestro-lyart.vercel.app/",
-                  })
-                }
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  src={PROJECT_IMGS[0]}
-                  alt="Music Maestro"
+              {PROJECTS.map((project, idx) => (
+                <ProjectCard
+                  key={project.title}
+                  project={project}
+                  index={idx}
+                  onOpen={() => setModal(project)}
                 />
-                <div className="project-overlay">
-                  <h4 className="text-4xl font-headline font-bold text-[var(--text)] mb-2 group-hover:text-accent transition-colors">
-                    Music Maestro
-                  </h4>
-                  <p className="text-[var(--text-muted)] mb-8 text-sm">
-                    An AI-powered app that turns your mood or prompt into a Spotify playlist automatically.
-                  </p>
-                  <div className="flex items-center gap-2 text-accent text-[10px] font-bold uppercase tracking-[0.3em]">
-                    Click to Interact{" "}
-                    <span className="material-symbols-outlined text-sm">
-                      north_east
-                    </span>
-                  </div>
-                </div>
-                {/* Mobile-only always-on interact badge */}
-                <div className="absolute bottom-4 right-4 md:hidden flex items-center gap-1.5 px-3 py-1.5 bg-[var(--surface-darker)] border border-accent-40 rounded-full text-accent text-[9px] font-bold uppercase tracking-widest z-10 shadow-lg pointer-events-none">
-                  <span>Interact</span>
-                  <span className="material-symbols-outlined text-[10px]">north_east</span>
-                </div>
-              </div>
-
-              {/* Card 2: MixNMatch */}
-              <div
-                className="project-card nav-link group"
-                onClick={() =>
-                  setModal({
-                    title: "MixNMatch",
-                    desc: "An interactive, keyboard-controlled web drum machine and loop station powered by the Web Audio API.",
-                    url: "https://mix-n-match-ten.vercel.app/",
-                  })
-                }
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  src={PROJECT_IMGS[1]}
-                  alt="MixNMatch"
-                />
-                <div className="project-overlay">
-                  <h4 className="text-4xl font-headline font-bold text-[var(--text)] mb-2 group-hover:text-accent transition-colors">
-                    MixNMatch
-                  </h4>
-                  <p className="text-[var(--text-muted)] mb-8 text-sm">
-                    An interactive, keyboard-controlled web drum machine and loop station powered by the Web Audio API.
-                  </p>
-                  <div className="flex items-center gap-2 text-accent text-[10px] font-bold uppercase tracking-[0.3em]">
-                    Click to Interact{" "}
-                    <span className="material-symbols-outlined text-sm">
-                      north_east
-                    </span>
-                  </div>
-                </div>
-                {/* Mobile-only always-on interact badge */}
-                <div className="absolute bottom-4 right-4 md:hidden flex items-center gap-1.5 px-3 py-1.5 bg-[var(--surface-darker)] border border-accent-40 rounded-full text-accent text-[9px] font-bold uppercase tracking-widest z-10 shadow-lg pointer-events-none">
-                  <span>Interact</span>
-                  <span className="material-symbols-outlined text-[10px]">north_east</span>
-                </div>
-              </div>
-
-              {/* Card 3: Stonks */}
-              <div
-                className="project-card nav-link group"
-                onClick={() =>
-                  setModal({
-                    title: "Stonks",
-                    desc: "A real-time fintech dashboard featuring a RAG-powered AI assistant for smart mutual fund insights.",
-                    url: "https://stonks-omega-red.vercel.app/",
-                  })
-                }
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  src={PROJECT_IMGS[2]}
-                  alt="Stonks"
-                />
-                <div className="project-overlay">
-                  <h4 className="text-4xl font-headline font-bold text-[var(--text)] mb-2 group-hover:text-accent transition-colors">
-                    Stonks
-                  </h4>
-                  <p className="text-[var(--text-muted)] mb-8 text-sm">
-                    A real-time fintech dashboard featuring a RAG-powered AI assistant for smart mutual fund insights.
-                  </p>
-                  <div className="flex items-center gap-2 text-accent text-[10px] font-bold uppercase tracking-[0.3em]">
-                    Click to Interact{" "}
-                    <span className="material-symbols-outlined text-sm">
-                      north_east
-                    </span>
-                  </div>
-                </div>
-                {/* Mobile-only always-on interact badge */}
-                <div className="absolute bottom-4 right-4 md:hidden flex items-center gap-1.5 px-3 py-1.5 bg-[var(--surface-darker)] border border-accent-40 rounded-full text-accent text-[9px] font-bold uppercase tracking-widest z-10 shadow-lg pointer-events-none">
-                  <span>Interact</span>
-                  <span className="material-symbols-outlined text-[10px]">north_east</span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -1332,12 +1287,7 @@ export default function Page() {
       {/* ── Project Modal ── */}
       <AnimatePresence>
         {modal && (
-          <ProjectModal
-            title={modal.title}
-            desc={modal.desc}
-            url={modal.url}
-            onClose={() => setModal(null)}
-          />
+          <ProjectModal project={modal} onClose={() => setModal(null)} />
         )}
       </AnimatePresence>
 
