@@ -1008,6 +1008,28 @@ export default function Page() {
                   id="cert-container"
                 >
                 <a
+                  className="nav-link relative flex-shrink-0 w-80 p-8 pb-16 bg-[var(--border-color)] border border-accent-40 rounded-2xl hover:border-[var(--primary)] transition-all group/card overflow-hidden"
+                  href="/assets/Suyash_Agrawal_Internship_Completion_Certificate.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="absolute inset-y-0 left-0 w-1 bg-[var(--primary)]" />
+                  <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[var(--primary)]/10 blur-3xl pointer-events-none" />
+                  <div className="text-[10px] font-bold text-accent mb-4 tracking-[0.2em]">
+                    APPINESS INTERACTIVE
+                  </div>
+                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover/card:text-accent transition-colors">
+                    Internship Completion Certificate
+                  </h4>
+                  <p className="text-xs text-[var(--text-muted)]">
+                    AI/ML Engineering Internship
+                  </p>
+                  <div className="absolute bottom-6 right-6 flex items-center gap-1 text-[9px] font-bold text-accent tracking-[0.2em] uppercase opacity-50 group-hover/card:opacity-100 transition-opacity">
+                    Click to view <span className="material-symbols-outlined text-[10px]">north_east</span>
+                  </div>
+                </a>
+
+                <a
                   className="nav-link relative flex-shrink-0 w-80 p-8 pb-16 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group/card"
                   href="/assets/Microsoft_Azure_AI_Fundamentals.pdf"
                   target="_blank"
