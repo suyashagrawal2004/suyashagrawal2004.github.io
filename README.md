@@ -91,23 +91,26 @@ I build full-stack intelligent applications using a modern, reactive stack:
 
 ## 🚀 Key Featured Projects
 
-### 🏫 EduHire
-*Hyperlocal Hiring Marketplace · Solo Build*
-- **The Concept:** A hyperlocal marketplace that matches preschool educators with schools within 5 km. It replaces WhatsApp-group hiring with a verified placement pipeline: anonymous matching, contact-masked chat, SHA-256-locked agreements, placement fees and replacement guarantees.
+### 🏫 [EduJobs](https://edujobs.in)
+*Hyperlocal Hiring Marketplace · Sole Proprietorship (Solo Build)*
+- **The Concept:** A hyperlocal marketplace that matches preschool educators with schools within 5 km. It replaces WhatsApp-group hiring with a verified placement pipeline: anonymous matching, contact-masked chat, SHA-256-locked agreements, placement fees and replacement guarantees. Owned and run as a sole proprietorship.
 - **Highlights:** Transactional command pattern (write + audit log + email outbox in one PostgreSQL transaction), PostGIS radius matching with hyperbolic distance decay, privacy-preserving Gemini 2.5 Flash summaries, RLS on all 20 tables, and 1,559 automated tests.
 - **Tech Stack:** Next.js 16, React 19, TypeScript, PostgreSQL 17, PostGIS, Drizzle ORM, Supabase, Gemini 2.5 Flash, Resend, Vitest, Playwright, Sentry.
+- **Live Site:** [edujobs.in](https://edujobs.in)
 
-### 💸 ZapFee
+### 💸 [ZapFee](https://zapfee.in)
 *Fee Collection & Accounting SaaS · Solo Build*
 - **The Concept:** A multi-tenant SaaS for Indian education businesses that combines admissions, fee schedules, UPI and Razorpay payments, and GST-compliant double-entry accounting.
 - **Highlights:** Claude Haiku 4.5 vision that reads UPI payment screenshots into structured JSON, a balanced double-entry ledger engine, a statutory GST matrix, HMAC-verified Razorpay webhooks, AES-256-GCM secret encryption, and 2,997 automated tests.
 - **Tech Stack:** Next.js 16, React 19, TypeScript, PostgreSQL, Prisma 7, Supabase, Anthropic Claude API, Razorpay, Tailwind CSS v4, jsPDF.
+- **Live Site:** [zapfee.in](https://zapfee.in)
 
-### 📞 Vola
+### 📞 [Vola](https://vola.appyverse.ai/)
 *AI Voice Agent Platform · Team project at Appiness Interactive*
 - **The Concept:** A multi-tenant platform where autonomous AI phone agents qualify leads, book appointments during calls, transfer live calls to humans and follow up on WhatsApp. One codebase serves four products.
 - **Highlights:** ElevenLabs and Fish Audio voice engines, a PostgreSQL optimistic-locking dialer, GPT-4o-mini lead scoring and task extraction, WhatsApp retry fallbacks, and proof-of-work anti-bot protection.
 - **Tech Stack:** Next.js 16, TypeScript, PostgreSQL, Drizzle ORM, ElevenLabs, Fish Audio, OpenAI GPT-4o-mini, Vercel AI SDK, WhatsApp Business API, Twilio.
+- **Live Site:** [vola.appyverse.ai](https://vola.appyverse.ai/)
 
 ### 🩺 Smart Physio
 *Clinic Management SaaS · Team project at Appiness Interactive*

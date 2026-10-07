@@ -26,14 +26,15 @@ export type SkillGroup = {
 
 export const PROJECTS: Project[] = [
   {
-    title: "EduHire",
+    title: "EduJobs",
     category: "Hyperlocal Hiring Marketplace",
-    context: "Solo Build",
+    context: "Sole Proprietorship · Solo Build",
     icon: "school",
+    url: "https://edujobs.in",
     summary:
-      "A hyperlocal marketplace that matches preschool educators with schools within 5 km, using PostGIS matching, privacy-first messaging and Gemini-powered deal summaries.",
+      "A hyperlocal marketplace that matches preschool educators with schools within 5 km, using PostGIS matching, privacy-first messaging and Gemini-powered deal summaries. Owned and run as a sole proprietorship.",
     description:
-      "EduHire replaces WhatsApp-group hiring with a verified placement pipeline. It covers spatial candidate matching, anonymous browsing until both sides consent, chat with contact details masked, SHA-256-locked commercial agreements, placement fees and a 30-day replacement guarantee.",
+      "EduJobs replaces WhatsApp-group hiring with a verified placement pipeline. It covers spatial candidate matching, anonymous browsing until both sides consent, chat with contact details masked, SHA-256-locked commercial agreements, placement fees and a 30-day replacement guarantee.",
     stats: [
       { value: "1,559", label: "Automated tests" },
       { value: "20", label: "Tables under RLS" },
@@ -66,6 +67,7 @@ export const PROJECTS: Project[] = [
     category: "Fee & Accounting SaaS",
     context: "Solo Build",
     icon: "receipt_long",
+    url: "https://zapfee.in",
     summary:
       "Multi-tenant fee collection and GST-compliant double-entry accounting for Indian education businesses, with Claude vision reading UPI payment screenshots.",
     description:
@@ -101,6 +103,7 @@ export const PROJECTS: Project[] = [
     category: "AI Voice Agent Platform",
     context: "Team · Appiness Interactive",
     icon: "graphic_eq",
+    url: "https://vola.appyverse.ai/",
     summary:
       "A multi-tenant platform where AI phone agents make human-like calls at scale, with live handoff to humans, GPT-4o-mini lead scoring and WhatsApp follow-ups.",
     description:
@@ -203,29 +206,68 @@ export const PROJECTS: Project[] = [
   {
     title: "Stonks",
     category: "Fintech Dashboard",
+    context: "Solo Build",
+    icon: "trending_up",
+    url: "https://stonks-omega-red.vercel.app/",
     summary:
       "A real-time fintech dashboard featuring a RAG-powered AI assistant for smart mutual fund insights.",
-    stack: ["React", "Python", "RAG", "LLM Assistant"],
-    url: "https://stonks-omega-red.vercel.app/",
-    image: "/assets/project-stonks.png",
+    description:
+      "Stonks combines live financial data tracking with a conversational RAG AI assistant. Users can analyze mutual funds, compare historical fund performances, and receive instant data-backed market insights powered by vector retrieval and LLMs.",
+    stats: [
+      { value: "RAG", label: "AI Retrieval" },
+      { value: "Live", label: "Fund Analytics" },
+      { value: "Instant", label: "AI Insights" },
+    ],
+    highlights: [
+      "RAG architecture indexing mutual fund portfolios and market data to ground LLM responses in real facts.",
+      "Interactive data visualizations tracking historical returns, NAV trends, and volatility metrics.",
+      "Low-latency response pipeline coupling vector retrieval with fine-tuned conversational prompt templates.",
+    ],
+    stack: ["React", "Python", "RAG", "LLM Assistant", "FastAPI", "Vector DB"],
   },
   {
     title: "Music Maestro",
     category: "Generative AI App",
+    context: "Solo Build",
+    icon: "music_note",
+    url: "https://music-maestro-lyart.vercel.app/",
     summary:
       "An AI-powered app that turns your mood or prompt into a Spotify playlist automatically.",
-    stack: ["Next.js", "TypeScript", "Generative AI", "Spotify Web API"],
-    url: "https://music-maestro-lyart.vercel.app/",
-    image: "/assets/project-music-maestro.png",
+    description:
+      "Music Maestro takes natural language descriptions of mood, activity, or vibe and converts them into carefully curated Spotify playlists. It communicates directly with the Spotify Web API to generate and save playlists to the user's account in seconds.",
+    stats: [
+      { value: "Mood AI", label: "Natural Language" },
+      { value: "Spotify", label: "Web API OAuth" },
+      { value: "Instant", label: "1-Click Sync" },
+    ],
+    highlights: [
+      "LLM prompting pipeline to extract musical genres, energy levels, tempo, and valence from open-ended user text.",
+      "OAuth 2.0 authorization code flow for secure, direct Spotify account access and playlist injection.",
+      "Dynamic track matching and acoustic property filtering ensuring playlists match the requested vibe.",
+    ],
+    stack: ["Next.js", "TypeScript", "Generative AI", "Spotify Web API", "Tailwind CSS"],
   },
   {
     title: "MixNMatch",
     category: "Web Audio Beat Maker",
+    context: "Solo Build",
+    icon: "piano",
+    url: "https://mix-n-match-ten.vercel.app/",
     summary:
       "An interactive, keyboard-controlled web drum machine and loop station powered by the Web Audio API.",
-    stack: ["React", "Framer Motion", "Web Audio API"],
-    url: "https://mix-n-match-ten.vercel.app/",
-    image: "/assets/project-mix-n-match.png",
+    description:
+      "MixNMatch is an in-browser digital audio workstation and beat maker. Built directly on the native Web Audio API, it offers zero-latency sample playback, custom keyboard mappings, rhythmic loop stations, and responsive sound visualization.",
+    stats: [
+      { value: "Web Audio", label: "Low Latency API" },
+      { value: "16", label: "Pads & Loops" },
+      { value: "100%", label: "In-Browser Engine" },
+    ],
+    highlights: [
+      "Native Web Audio API audio graph ensuring glitch-free, ultra-low-latency sample triggering across browsers.",
+      "Custom keyboard and mouse event binding system allowing real-time multi-track drumming and looping.",
+      "Hardware-accelerated visualizer synchronized to audio frequency and gain nodes.",
+    ],
+    stack: ["React", "Framer Motion", "Web Audio API", "Tailwind CSS"],
   },
 ];
 

@@ -152,7 +152,7 @@ function ProjectModal({
     >
       <div className="absolute inset-0 modal-backdrop" onClick={onClose} />
       <div className="relative w-full h-full flex items-center justify-center p-4 md:p-8 pointer-events-none">
-        <div className="pointer-events-auto bg-[var(--surface-variant)] border border-[var(--border-color)] w-full max-w-6xl h-[90vh] rounded-3xl overflow-hidden flex flex-col shadow-2xl">
+        <div className="pointer-events-auto bg-[var(--surface-variant)] border border-[var(--border-color)] w-full max-w-4xl max-h-[90vh] rounded-3xl overflow-hidden flex flex-col shadow-2xl">
           <div className="p-6 md:p-8 border-b border-[var(--border-color)]">
             <div className="flex justify-between items-start gap-4 mb-2">
               <div>
@@ -166,22 +166,22 @@ function ProjectModal({
                   {title}
                 </h3>
               </div>
-              <div className="flex gap-4 shrink-0">
+              <div className="flex gap-3 shrink-0">
                 {url && (
                   <a
                     href={url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="nav-link px-4 md:px-6 py-2 bg-[var(--border-color)] text-[var(--text)] text-[10px] md:text-xs font-bold uppercase rounded-lg hover:bg-white/20 transition-all flex items-center gap-2"
+                    className="nav-link px-4 md:px-5 py-2 bg-[var(--primary)] text-black text-[10px] md:text-xs font-bold uppercase rounded-lg hover:brightness-110 transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(243,255,202,0.3)]"
                   >
-                    Open In New Tab{" "}
+                    Open Live Site{" "}
                     <span className="material-symbols-outlined text-sm">
-                      open_in_new
+                      north_east
                     </span>
                   </a>
                 )}
                 <button
-                  className="nav-link w-10 h-10 flex items-center justify-center bg-red-500/20 text-red-500 rounded-lg hover:bg-red-500/30 transition-all"
+                  className="nav-link w-9 h-9 flex items-center justify-center bg-red-500/20 text-red-500 rounded-lg hover:bg-red-500/30 transition-all"
                   onClick={onClose}
                   aria-label="Close project"
                 >
@@ -193,72 +193,59 @@ function ProjectModal({
               {project.description ?? project.summary}
             </p>
           </div>
-          {url ? (
-            <div className="flex-1 overflow-hidden flex flex-col">
-              <div className="flex-1 p-4 md:p-6">
-                <div className="w-full h-full bg-black/40 rounded-2xl border border-[var(--border-color)] overflow-hidden shadow-inner">
-                  <iframe
-                    src={url}
-                    className="w-[133.33%] h-[133.33%] border-0 origin-top-left scale-[0.75]"
-                    title={title}
-                  />
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="flex-1 overflow-y-auto overscroll-contain p-6 md:p-8 space-y-10">
-              {stats && (
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {stats.map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="p-6 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl"
-                    >
-                      <div className="font-headline text-3xl md:text-4xl font-bold leading-none text-accent">
-                        {stat.value}
-                      </div>
-                      <div className="mt-3 text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--text-muted)]">
-                        {stat.label}
-                      </div>
+
+          <div className="flex-1 overflow-y-auto overscroll-contain p-6 md:p-8 space-y-8">
+            {stats && (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="p-5 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl"
+                  >
+                    <div className="font-headline text-3xl md:text-4xl font-bold leading-none text-accent">
+                      {stat.value}
                     </div>
-                  ))}
-                </div>
-              )}
-              {highlights && (
-                <div>
-                  <h4 className="text-[13px] font-bold text-accent tracking-[0.15em] uppercase mb-5">
-                    Engineering Highlights
-                  </h4>
-                  <ul className="grid md:grid-cols-2 gap-4">
-                    {highlights.map((highlight) => (
-                      <li
-                        key={highlight}
-                        className="flex gap-3 p-5 bg-white/[0.02] border border-[var(--border-color)] rounded-2xl text-sm text-[var(--text-muted)] leading-relaxed"
-                      >
-                        <span className="mt-2 w-1.5 h-1.5 shrink-0 rounded-full bg-[var(--primary)]" />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+                    <div className="mt-2 text-[10px] font-bold tracking-[0.2em] uppercase text-[var(--text-muted)]">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {highlights && highlights.length > 0 && (
               <div>
-                <h4 className="text-[13px] font-bold text-accent tracking-[0.15em] uppercase mb-5">
-                  Tech Stack
+                <h4 className="text-[13px] font-bold text-accent tracking-[0.15em] uppercase mb-4">
+                  Engineering Highlights
                 </h4>
-                <div className="flex flex-wrap gap-2.5">
-                  {project.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-4 py-2 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]"
+                <ul className="grid md:grid-cols-2 gap-3.5">
+                  {highlights.map((highlight) => (
+                    <li
+                      key={highlight}
+                      className="flex gap-3 p-4 bg-white/[0.02] border border-[var(--border-color)] rounded-2xl text-sm text-[var(--text-muted)] leading-relaxed"
                     >
-                      {tech}
-                    </span>
+                      <span className="mt-2 w-1.5 h-1.5 shrink-0 rounded-full bg-[var(--primary)]" />
+                      <span>{highlight}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
+              </div>
+            )}
+            <div>
+              <h4 className="text-[13px] font-bold text-accent tracking-[0.15em] uppercase mb-4">
+                Tech Stack
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {project.stack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3.5 py-1.5 bg-[var(--border-color)] border border-[var(--border-color)] rounded-xl text-xs font-medium text-[var(--text-muted)]"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </motion.div>
@@ -266,12 +253,19 @@ function ProjectModal({
 }
 
 /* ═══════════════════════════════════════════════════
-   PROJECT COVER — typographic card face for projects
-   without a screenshot (stats swap to summary on hover)
+   PROJECT COVER — unified typographic card face
    ═══════════════════════════════════════════════════ */
-function ProjectCover({ project, index }: { project: Project; index: number }) {
+function ProjectCover({
+  project,
+  index,
+  onOpenModal,
+}: {
+  project: Project;
+  index: number;
+  onOpenModal: () => void;
+}) {
   return (
-    <div className="project-cover absolute inset-0 flex flex-col justify-between p-6 pb-12 md:p-10">
+    <div className="project-cover absolute inset-0 flex flex-col justify-between p-6 pb-12 md:p-10 select-none">
       <span className="material-symbols-outlined project-cover-icon" aria-hidden="true">
         {project.icon}
       </span>
@@ -286,7 +280,7 @@ function ProjectCover({ project, index }: { project: Project; index: number }) {
         )}
       </div>
       <div className="relative">
-        <h4 className="font-headline text-3xl md:text-6xl font-bold tracking-tighter leading-none text-[var(--text)]">
+        <h4 className="font-headline text-3xl md:text-6xl font-bold tracking-tighter leading-none text-[var(--text)] group-hover:text-accent transition-colors">
           {project.title}
         </h4>
         <div className="relative hidden md:block mt-6 pt-5 min-h-[96px] border-t border-[var(--border-color)]">
@@ -302,13 +296,35 @@ function ProjectCover({ project, index }: { project: Project; index: number }) {
               </div>
             ))}
           </div>
-          <div className="absolute inset-x-0 top-5 opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-            <p className="text-sm text-[var(--text-muted)] leading-relaxed line-clamp-2 mb-3">
+          <div className="absolute inset-x-0 top-5 opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 flex items-center justify-between gap-4">
+            <p className="text-sm text-[var(--text-muted)] leading-relaxed line-clamp-2 max-w-md">
               {project.summary}
             </p>
-            <div className="flex items-center gap-2 text-accent text-[10px] font-bold uppercase tracking-[0.3em]">
-              View Case Study{" "}
-              <span className="material-symbols-outlined text-sm">north_east</span>
+            <div className="flex items-center gap-2 shrink-0">
+              {project.url ? (
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--primary)] text-black rounded-lg text-[10px] font-bold uppercase tracking-wider shadow-[0_0_12px_rgba(243,255,202,0.25)]">
+                  <span>Visit Site</span>
+                  <span className="material-symbols-outlined text-xs">north_east</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--primary)] text-black rounded-lg text-[10px] font-bold uppercase tracking-wider">
+                  <span>Case Study</span>
+                  <span className="material-symbols-outlined text-xs">north_east</span>
+                </div>
+              )}
+              {project.url && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onOpenModal();
+                  }}
+                  className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider transition-colors flex items-center gap-1"
+                >
+                  <span>Details</span>
+                  <span className="material-symbols-outlined text-xs">info</span>
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -326,38 +342,47 @@ function ProjectCard({
   index: number;
   onOpen: () => void;
 }) {
+  const handleClick = () => {
+    if (project.url) {
+      window.open(project.url, "_blank", "noopener,noreferrer");
+    } else {
+      onOpen();
+    }
+  };
+
   return (
-    <div className="project-card nav-link group" onClick={onOpen}>
-      {project.image ? (
-        <>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-            src={project.image}
-            alt={project.title}
-          />
-          <div className="project-overlay">
-            <h4 className="text-4xl font-headline font-bold text-[var(--text)] mb-2 group-hover:text-accent transition-colors">
-              {project.title}
-            </h4>
-            <p className="text-[var(--text-muted)] mb-8 text-sm">
-              {project.summary}
-            </p>
-            <div className="flex items-center gap-2 text-accent text-[10px] font-bold uppercase tracking-[0.3em]">
-              Click to Interact{" "}
-              <span className="material-symbols-outlined text-sm">
-                north_east
-              </span>
-            </div>
-          </div>
-        </>
-      ) : (
-        <ProjectCover project={project} index={index} />
-      )}
-      {/* Mobile-only always-on badge */}
-      <div className="absolute bottom-4 right-4 md:hidden flex items-center gap-1.5 px-3 py-1.5 bg-[var(--surface-darker)] border border-accent-40 rounded-full text-accent text-[9px] font-bold uppercase tracking-widest z-10 shadow-lg pointer-events-none">
-        <span>{project.url ? "Interact" : "Details"}</span>
-        <span className="material-symbols-outlined text-[10px]">north_east</span>
+    <div
+      className="project-card nav-link group cursor-pointer"
+      onClick={handleClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleClick();
+        }
+      }}
+    >
+      <ProjectCover project={project} index={index} onOpenModal={onOpen} />
+      {/* Mobile-only always-on badges */}
+      <div className="absolute bottom-4 right-4 md:hidden flex items-center gap-2 z-10">
+        {project.url && (
+          <span className="flex items-center gap-1 px-3 py-1.5 bg-[var(--primary)] text-black rounded-full text-[9px] font-bold uppercase tracking-widest shadow-lg pointer-events-none">
+            <span>Visit</span>
+            <span className="material-symbols-outlined text-[10px]">north_east</span>
+          </span>
+        )}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpen();
+          }}
+          className="flex items-center gap-1 px-3 py-1.5 bg-[var(--surface-darker)] border border-accent-40 rounded-full text-accent text-[9px] font-bold uppercase tracking-widest shadow-lg"
+        >
+          <span>Details</span>
+          <span className="material-symbols-outlined text-[10px]">info</span>
+        </button>
       </div>
     </div>
   );
@@ -864,12 +889,21 @@ export default function Page() {
                       Amaravati, AP, India
                     </p>
                   </div>
-                  <div className="p-4 bg-[var(--border-color)] rounded-2xl border border-[var(--border-color)] inline-block">
-                    <span className="text-accent font-bold">
-                      8.52 / 10.0
-                    </span>{" "}
-                    <span className="text-[var(--text-muted)] ml-2">CGPA</span>
-                  </div>
+                  <a
+                    className="nav-link group p-4 bg-[var(--border-color)] rounded-xl border border-[var(--border-color)] inline-flex items-center gap-4 hover:border-accent-40 hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(243,255,202,0.14)] transition-all"
+                    href="/assets/Suyash_Agrawal_BTech-CSE.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="text-accent font-bold">8.52 / 10.0</span>
+                    <div className="h-4 w-px bg-[var(--border-color)]" />
+                    <span className="text-xs text-[var(--text-muted)] uppercase tracking-widest">
+                      CGPA · Degree Certificate
+                    </span>
+                    <span className="material-symbols-outlined text-sm text-accent opacity-70 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100">
+                      north_east
+                    </span>
+                  </a>
                 </Reveal>
               </div>
 
@@ -895,13 +929,21 @@ export default function Page() {
                   <p className="text-sm text-[var(--text-muted)] leading-relaxed max-w-sm mb-6">
                     <strong className="text-[var(--text)] font-semibold">Science Stream (PCMC):</strong> Physics, Chemistry, Mathematics, with Computer Science.
                   </p>
-                  <div className="p-4 bg-[var(--border-color)] rounded-xl border border-[var(--border-color)] inline-flex items-center gap-4">
+                  <a
+                    className="nav-link group p-4 bg-[var(--border-color)] rounded-xl border border-[var(--border-color)] inline-flex items-center gap-4 hover:border-accent-40 hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(243,255,202,0.14)] transition-all"
+                    href="/assets/Suyash_Agrawal_CBSE_Grade_12_Board_Results.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <span className="text-accent font-bold">92.8%</span>
                     <div className="h-4 w-px bg-[var(--border-color)]" />
                     <span className="text-xs text-[var(--text-muted)] uppercase tracking-widest">
-                      Graduated with Distinction
+                      Distinction · Board Results
                     </span>
-                  </div>
+                    <span className="material-symbols-outlined text-sm text-accent opacity-70 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100">
+                      north_east
+                    </span>
+                  </a>
                 </Reveal>
               </div>
 
@@ -927,21 +969,34 @@ export default function Page() {
                   <p className="text-sm text-[var(--text-muted)] leading-relaxed max-w-sm mb-6">
                     <strong className="text-[var(--text)] font-semibold">General Subjects:</strong> Mathematics, Science, Social Science, Hindi, and English.
                   </p>
-                  <a
-                    className="nav-link group p-4 bg-[var(--border-color)] rounded-xl border border-[var(--border-color)] inline-flex items-center gap-4 hover:border-accent-40 hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(243,255,202,0.14)] transition-all"
-                    href="/assets/Suyash_Agrawal_Grade_10_Certificate_Of_Merit.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span className="text-accent font-bold">94.4%</span>
-                    <div className="h-4 w-px bg-[var(--border-color)]" />
-                    <span className="text-xs text-[var(--text-muted)] uppercase tracking-widest">
-                      Academic Excellence
-                    </span>
-                    <span className="material-symbols-outlined text-sm text-accent opacity-70 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100">
-                      north_east
-                    </span>
-                  </a>
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      className="nav-link group p-4 bg-[var(--border-color)] rounded-xl border border-[var(--border-color)] inline-flex items-center gap-4 hover:border-accent-40 hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(243,255,202,0.14)] transition-all"
+                      href="/assets/Suyash_Agrawal_CBSE_Grade_10_Board_Results.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="text-accent font-bold">94.4%</span>
+                      <div className="h-4 w-px bg-[var(--border-color)]" />
+                      <span className="text-xs text-[var(--text-muted)] uppercase tracking-widest">
+                        Board Results
+                      </span>
+                      <span className="material-symbols-outlined text-sm text-accent opacity-70 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100">
+                        north_east
+                      </span>
+                    </a>
+                    <a
+                      className="nav-link group px-4 py-3 bg-[var(--border-color)]/60 rounded-xl border border-[var(--border-color)] inline-flex items-center gap-2 hover:border-accent-40 hover:-translate-y-0.5 transition-all text-xs text-[var(--text-muted)] hover:text-accent"
+                      href="/assets/Suyash_Agrawal_Grade_10_Certificate_Of_Merit.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span>Certificate of Merit</span>
+                      <span className="material-symbols-outlined text-xs opacity-70 group-hover:opacity-100">
+                        north_east
+                      </span>
+                    </a>
+                  </div>
                 </Reveal>
               </div>
             </div>
@@ -1023,6 +1078,26 @@ export default function Page() {
                   </h4>
                   <p className="text-xs text-[var(--text-muted)]">
                     AI/ML Engineering Internship
+                  </p>
+                  <div className="absolute bottom-6 right-6 flex items-center gap-1 text-[9px] font-bold text-accent tracking-[0.2em] uppercase opacity-50 group-hover/card:opacity-100 transition-opacity">
+                    Click to view <span className="material-symbols-outlined text-[10px]">north_east</span>
+                  </div>
+                </a>
+
+                <a
+                  className="nav-link relative flex-shrink-0 w-80 p-8 pb-16 bg-[var(--border-color)] border border-[var(--border-color)] rounded-2xl hover:border-accent-40 transition-all group/card"
+                  href="/assets/Suyash_Agrawal_StartupB_Internship.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="text-[10px] font-bold text-accent mb-4 tracking-[0.2em]">
+                    STARTUPB CONSULTANCY
+                  </div>
+                  <h4 className="text-[var(--text)] font-bold mb-2 group-hover/card:text-accent transition-colors">
+                    Internship Completion Certificate
+                  </h4>
+                  <p className="text-xs text-[var(--text-muted)]">
+                    Hardware &amp; Desktop Technical Support
                   </p>
                   <div className="absolute bottom-6 right-6 flex items-center gap-1 text-[9px] font-bold text-accent tracking-[0.2em] uppercase opacity-50 group-hover/card:opacity-100 transition-opacity">
                     Click to view <span className="material-symbols-outlined text-[10px]">north_east</span>
